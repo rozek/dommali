@@ -1,3 +1,3 @@
 # dommali #
 
-a lightweight DOM manipulation library with jQuery-inspired API
+a lightweight DOM manipulation library with jQuery-inspired "fluent" API
