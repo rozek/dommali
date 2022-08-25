@@ -402,7 +402,7 @@ var DOMMaLi = /** @class */ (function () {
         return this;
     };
     /**** show ****/
-    DOMMaLi.prototype.show = function (DisplaySetting) {
+    DOMMaLi.prototype.show = function () {
         this.Subjects.forEach(function (Subject) {
             if (Subject instanceof HTMLElement) {
                 var computedStyle = getComputedStyle(Subject);

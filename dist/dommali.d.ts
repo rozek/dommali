@@ -85,7 +85,7 @@ declare abstract class DOMMaLi {
     /**** scrollTo ****/
     scrollTo(this: DOMMaLi, x: number, y: number, Mode?: 'instant' | 'smooth' | 'auto'): DOMMaLi;
     /**** show ****/
-    show(this: DOMMaLi, DisplaySetting?: string): DOMMaLi;
+    show(this: DOMMaLi): DOMMaLi;
     /**** hide ****/
     hide(this: DOMMaLi): DOMMaLi;
     /**** hasClass ****/
