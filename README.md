@@ -106,9 +106,9 @@ The signatures shown below are those used by TypeScript
 
 ### CSS Queries ###
 
-* **`matches (Selector:string|String):boolean`**<br>
-* **`find (Selector:string|String):DOMMaLi`**<br>
-* **`findFirst (Selector:string|String):DOMMaLi`**<br>
+* **`matches (Selector:string|String):boolean`**<br>returns `true` if the first DOM element represented by this `dommali` object matches the given CSS selector - or `false` otherwise
+* **`find (Selector:string|String):DOMMaLi`**<br>returns a new (and possibly empty) `dommali` object representing all those DOM elements within the scope of this `dommali` object that match the given CSS selector
+* **`findFirst (Selector:string|String):DOMMaLi`**<br>returns a new (and possibly empty) `dommali` object representing the first DOM element within the scope of this `dommali` object that matches the given CSS selector
 
 ### Position and Size ###
 
