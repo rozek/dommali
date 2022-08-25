@@ -82,71 +82,88 @@ The signatures shown are those used by TypeScript
 
 ### Object Inspection ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`get length ():number`**<br>
+* **`size ():number`**<br>
+* **`isEmpty ():boolean`**<br>
+* **`subjects ():Element[]`**<br>
+* **`subject (Index:number):Element|undefined`**<br>
+* **`indexOf (Value:Element|DOMMaLi):number`**<br>
 
 ### Element Extraction ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`slice (start?:number, end?:number):DOMMaLi`**<br>
+* **`first ():DOMMaLi`**<br>
+* **`last ():DOMMaLi`**<br>
+* **`eq (Index:number):DOMMaLi`**<br>
 
 ### Content Iterators ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`forEach (Callback:Function):DOMMaLi`**<br>
+* **`filter (SelectorOrCallback:string|String|Function):DOMMaLi`**<br>
 
 ### CSS Queries ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`matches (Selector:string|String):boolean`**<br>
+* **`find (Selector:string|String):DOMMaLi`**<br>
+* **`findFirst (Selector:string|String):DOMMaLi`**<br>
 
 ### Position and Size ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`positionInViewport ():{ left:number,top:number }|undefined`**<br>
+* **`renderPositionInViewport ():{ left:number,top:number }|undefined`**<br>
+* **`positionInParent ():{ left:number,top:number }|undefined`**<br>
+* **`LayoutositionInParent ():{ left:number,top:number }|undefined`**<br>
+* **`positionOnPage ():{ left:number,top:number }|undefined`**<br>
+* **`layoutPositionOnPage ():{ left:number,top:number }|undefined`**<br>
+* **`width (newValue?:number):number|DOMMaLi|undefined`**<br>
+* **`height (newValue?:number):number|DOMMaLi|undefined`**<br>
+* **`layoutWidth (newValue?:number):number|DOMMaLi|undefined`**<br>
+* **`layoutHeight (newValue?:number):number|DOMMaLi|undefined`**<br>
+* **`outerWidth (newValue?:number):number|DOMMaLi|undefined`**<br>
+* **`outerHeight (newValue?:number):number|DOMMaLi|undefined`**<br>
+* **`renderWidth (newValue?:number):number|DOMMaLi|undefined`**<br>
+* **`renderWeight (newValue?:number):number|DOMMaLi|undefined`**<br>
 
 ### DOM Hierarchy ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`parent ():DOMMaLi`**<br>
+* **`closest (Selector:string|String):DOMMaLi`**<br>
+* **`isAttached ():boolean`**<br>
+* **`contains (Candidate:DOMMaLi):boolean`**<br>
+* **`children (Selector?:string|String):DOMMaLi`**<br>
+* **`firstChild (Selector?:string|String):DOMMaLi`**<br>
+* **`lastChild (Selector?:string|String):DOMMaLi`**<br>
+* **`prev (Selector?:string|String):DOMMaLi`**<br>
+* **`next (Selector?:string|String):DOMMaLi`**<br>
 
 ### Visibility ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`show (DisplaySetting?:string):DOMMaLi`**<br>
+* **`hide ():DOMMaLi`**<br>
+
+### Scrolling ###
+
+* **`scrollLeft ():number|undefined`**<br>
+* **`scrollTop ():number|undefined`**<br>
+* **`scrollRight ():number|undefined`**<br>
+* **`scrollBottom ():number|undefined`**<br>
+* **`scrollTo (x:number, y:number, Mode:'instant'|'smooth'|'auto' = 'auto'):DOMMaLi`**<br>
 
 ### CSS Class Management ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`hasClass (Classes:string):boolean`**<br>
+* **`addClass (Classes:string):DOMMaLi`**<br>
+* **`toggleClass (Classes:string):DOMMaLi`**<br>
+* **`removeClass (Classes:string):DOMMaLi`**<br>
 
 ### Insertion and Removal ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`append (Content:string|String|DOMMaLi|Element|Element[]):DOMMaLi`**<br>
+* **`prepend (Content:string|String|DOMMaLi|Element|Element[]):DOMMaLi`**<br>
+* **`insertAfter (Content:DOMMaLi):DOMMaLi`**<br>
+* **`insertBefore (Content:DOMMaLi):DOMMaLi`**<br>
+* **`replaceWith (Replacement:string|String|DOMMaLi|Element|Element[]):void`**<br>
+* **`remove ():DOMMaLi`**<br>
 
 ### Properties ###
 
