@@ -93,10 +93,10 @@ The signatures shown below are those used by TypeScript
 
 ### Element Extraction ###
 
-* **`slice (start?:number, end?:number):DOMMaLi`**<br>
-* **`first ():DOMMaLi`**<br>
-* **`last ():DOMMaLi`**<br>
-* **`eq (Index:number):DOMMaLi`**<br>
+* **`slice (start?:number, end?:number):DOMMaLi`**<br>returns a new `dommali` object representing all items from the list of DOM elements represented by _this_ `dommali` object starting at index `start` and ending before index `end` (or until the end of the list, if `end` was omitted). If both `start` and `end` are missing, _this_ `dommali` object is simply duplicated
+* **`first ():DOMMaLi`**<br>returns a new `dommali` object representing the first element from the list of DOM elements represented by _this_ `dommali` object - or any empty `dommali` object if _this_ one is empty as well
+* **`last ():DOMMaLi`**<br>returns a new `dommali` object representing the last element from the list of DOM elements represented by _this_ `dommali` object - or any empty `dommali` object if _this_ one is empty as well
+* **`eq (Index:number):DOMMaLi`**<br>returns a new `dommali` object representing the element at index `Index` from the list of DOM elements represented by _this_ `dommali` object - or any empty `dommali` object if no such element exists
 
 ### Content Iterators ###
 
