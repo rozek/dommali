@@ -112,20 +112,22 @@ The signatures shown below are those used by TypeScript
 
 ### Position and Size ###
 
-* **`positionInViewport ():{ left:number,top:number }|undefined`**<br>
-* **`renderPositionInViewport ():{ left:number,top:number }|undefined`**<br>
-* **`positionInParent ():{ left:number,top:number }|undefined`**<br>
-* **`LayoutositionInParent ():{ left:number,top:number }|undefined`**<br>
-* **`positionOnPage ():{ left:number,top:number }|undefined`**<br>
-* **`layoutPositionOnPage ():{ left:number,top:number }|undefined`**<br>
-* **`width (newValue?:number):number|DOMMaLi|undefined`**<br>
-* **`height (newValue?:number):number|DOMMaLi|undefined`**<br>
-* **`layoutWidth (newValue?:number):number|DOMMaLi|undefined`**<br>
-* **`layoutHeight (newValue?:number):number|DOMMaLi|undefined`**<br>
-* **`outerWidth (newValue?:number):number|DOMMaLi|undefined`**<br>
-* **`outerHeight (newValue?:number):number|DOMMaLi|undefined`**<br>
-* **`renderWidth (newValue?:number):number|DOMMaLi|undefined`**<br>
-* **`renderWeight (newValue?:number):number|DOMMaLi|undefined`**<br>
+* **`positionInViewport ():{ left:number,top:number }|undefined`**<br>returns the _rendering_ position of the first DOM element represented by _this_ `dommali` object relative to the current viewport (or `undefined` if _this_ `dommali` object is empty)
+* **`renderPositionInViewport ():{ left:number,top:number }|undefined`**<br>is just a synonym for `positionInViewport`, emphasizing the fact, that the _rendering_ position is returned (which depends of CSS transforms for that DOM element)
+* **`positionInParent ():{ left:number,top:number }|undefined`**<br>returns the _layout_ position of the first DOM element represented by _this_ `dommali` object relative to its "offset parent" (or `undefined` if either _this_ `dommali` object is empty or no offset parent could be found)
+* **`layoutPositionInParent ():{ left:number,top:number }|undefined`**<br>is just a synonym for `positionInParent`, emphasizing the fact, that the _layout_ position is returned (which is independent of any DOM element CSS transforms)
+* **`positionOnPage ():{ left:number,top:number }|undefined`**<br>returns the _layout_ position of the first DOM element represented by _this_ `dommali` object relative to the document (or `undefined` if _this_ `dommali` object is empty)
+* **`layoutPositionOnPage ():{ left:number,top:number }|undefined`**<br>is just a synonym for `positionOnPage`, emphasizing the fact, that the _layout_ position is returned (which is independent of any DOM element CSS transforms)
+* **`width (newValue?:number):number|DOMMaLi|undefined`**<br>if no `newValue` is given, this method returns the _layout_ width of the first DOM element represented by _this_ `dommali` object (or `undefined` if _this_ `dommali` object is empty). Otherwise, the _layout_ width of all DOM elements represented by _this_ `dommali` object is set to the `newValue` pixels
+* **`height (newValue?:number):number|DOMMaLi|undefined`**<br>if no `newValue` is given, this method returns the _layout_ height of the first DOM element represented by _this_ `dommali` object (or `undefined` if _this_ `dommali` object is empty). Otherwise, the _layout_ height of all DOM elements represented by _this_ `dommali` object is set to the `newValue` pixels
+* **`layoutWidth (newValue?:number):number|DOMMaLi|undefined`**<br>is just a synonym for `width`, emphasizing the fact, that the _layout_ width is returned or set (which is independent of any DOM element CSS transforms)
+* **`layoutHeight (newValue?:number):number|DOMMaLi|undefined`**<br>is just a synonym for `height`, emphasizing the fact, that the _layout_ height is returned or set (which is independent of any DOM element CSS transforms)
+* **`outerWidth (newValue?:number):number|DOMMaLi|undefined`**<br>is just a synonym for `width`, emphasizing the fact, that the returned width includes the element's padding and border
+* **`outerHeight (newValue?:number):number|DOMMaLi|undefined`**<br>is just a synonym for `height`, emphasizing the fact, that the returned height includes the element's padding and border
+* **`renderWidth ():number|undefined`**<br>returns the _render_ width of the first DOM element represented by _this_ `dommali` object (or `undefined` if _this_ `dommali` object is empty). The result is affected by any CSS transforms for that element
+* **`renderHeight ():number|undefined`**<br>returns the _render_ height of the first DOM element represented by _this_ `dommali` object (or `undefined` if _this_ `dommali` object is empty). The result is affected by any CSS transforms for that element
+* **`innerWidth ():number|undefined`**<br>returns the "inner" _layout_ width of the first DOM element represented by _this_ `dommali` object (or `undefined` if _this_ `dommali` object is empty) without border, padding and scrollbars
+* **`innerHeight ():number|undefined`**<br>returns the "inner" _layout_ height of the first DOM element represented by _this_ `dommali` object (or `undefined` if _this_ `dommali` object is empty) without border, padding and scrollbars
 
 ### DOM Hierarchy ###
 
