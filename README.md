@@ -64,17 +64,19 @@ $(document.body).html('<h1>Hello, World!</h1>')
 
 ## API Reference ##
 
-The signatures shown are those used by TypeScript
+Similar to jQuery, `dommali` objects (i.e., instances of type `DOMMaLi`) represent collections of zero, one or multiple DOM elements. These elements may not be in document order unless they have been found by a CSS query or retrieved as the children of another element. While `dommali` objects may represent DOM elements of any type, several methods only work on items of type `HTMLElement` - other elements will be ignored.
+
+The signatures shown below are those used by TypeScript
 
 ### Factory Function ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali(startup:Function):typeof DOMMaLi`**<br>
-* **`dommali(selector:string):DOMMaLi`**<br>
-* **`dommali(html:string):DOMMaLi`**<br>
-* **`dommali(element:Element):DOMMaLi`**<br>
-* **`dommali(elements:Element[]):DOMMaLi`**<br>
-* **`dommali(bridge:DOMMaLi):DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>returns an empty `dommali` object, i.e., one that represents no DOM element
+* **`dommali(startup:Function):typeof DOMMaLi`**<br>is a shortcut for `DOMMaLi.ready(startup)` (see below)
+* **`dommali(selector:string):DOMMaLi`**<br>returns a `dommali` object representing all DOM elements matching the given CSS selector
+* **`dommali(html:string):DOMMaLi`**<br>returns a `dommali` object representing all DOM elements created from the given HTML code
+* **`dommali(element:Element):DOMMaLi`**<br>returns a `dommali` object representing the given DOM element
+* **`dommali(elements:Element[]):DOMMaLi`**<br>returns a `dommali` object representing the given DOM elements (in the given order)
+* **`dommali(bridge:DOMMaLi):DOMMaLi`**<br>returns a duplicate of the given `dommali` object
 
 ### Class Method ###
 
