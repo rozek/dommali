@@ -131,15 +131,15 @@ The signatures shown below are those used by TypeScript
 
 ### DOM Hierarchy ###
 
-* **`parent ():DOMMaLi`**<br>
-* **`closest (Selector:string|String):DOMMaLi`**<br>
-* **`isAttached ():boolean`**<br>
-* **`contains (Candidate:DOMMaLi):boolean`**<br>
-* **`children (Selector?:string|String):DOMMaLi`**<br>
-* **`firstChild (Selector?:string|String):DOMMaLi`**<br>
-* **`lastChild (Selector?:string|String):DOMMaLi`**<br>
-* **`prev (Selector?:string|String):DOMMaLi`**<br>
-* **`next (Selector?:string|String):DOMMaLi`**<br>
+* **`parent ():DOMMaLi`**<br>returns a new `dommali` object representing the "parent" of the first DOM element represented by _this_ `dommali` object (or an empty `dommali` object if this one is empty as well)
+* **`closest (Selector:string|String):DOMMaLi`**<br>returns a new `dommali` object representing the innermost element among the first DOM element represented by _this_ `dommali` object and its parents, that matches the given `Selector` (or an empty `dommali` object if either this one is empty or no matching DOM element could be found)
+* **`isAttached ():boolean`**<br>returns `true`, if the first DOM element represented by _this_ `dommali` object is part of the document - or `false` otherwise
+* **`contains (Candidate:DOMMaLi):boolean`**<br>returns `true`, if the first DOM element represented by _this_ `dommali` object contains the first DOM element represented by the given `Candidate` - or `false` otherwise
+* **`children (Selector?:string|String):DOMMaLi`**<br>if `Selector` is missing, this method returns a new `dommali` object representing all direct "children" of the first DOM element represented by _this_ `dommali` object. Otherwise, the new `dommali` object represents only those children which also match the given CSS `Selector`
+* **`firstChild (Selector?:string|String):DOMMaLi`**<br>if `Selector` is missing, this method returns a new `dommali` object representing the first direct "child" of the first DOM element represented by _this_ `dommali` object. Otherwise, the new `dommali` object represents the first child which also matches the given CSS `Selector`
+* **`lastChild (Selector?:string|String):DOMMaLi`**<br>if `Selector` is missing, this method returns a new `dommali` object representing the last direct "child" of the first DOM element represented by _this_ `dommali` object. Otherwise, the new `dommali` object represents the last child which also matches the given CSS `Selector`
+* **`prev (Selector?:string|String):DOMMaLi`**<br>if `Selector` is missing, this method returns a new `dommali` object representing the immediately preceding "sibling" of the first DOM element represented by _this_ `dommali` object - i.e., the direct child of that element's parent, which immediately precedes it. Otherwise, the new `dommali` object represents the nearest preceding "sibling" which also matches the given CSS `Selector`
+* **`next (Selector?:string|String):DOMMaLi`**<br>if `Selector` is missing, this method returns a new `dommali` object representing the immediately following "sibling" of the first DOM element represented by _this_ `dommali` object - i.e., the direct child of that element's parent, which immediately follows it. Otherwise, the new `dommali` object represents the nearest following "sibling" which also matches the given CSS `Selector`
 
 ### Visibility ###
 
