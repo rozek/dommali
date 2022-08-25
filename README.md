@@ -167,51 +167,58 @@ The signatures shown are those used by TypeScript
 
 ### Properties ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`prop (Property:string, newValue?:any):DOMMaLi|any|undefined`**<br>
+* **`hasProp (Property:string):boolean`**<br>
+* **`removeProp (Property:string):DOMMaLi`**<br>
 
 ### Data ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`data (Key:string, newValue?:any):DOMMaLi|any|undefined`**<br>
+* **`hasData (Key:string):boolean`**<br>
+* **`removeData (Key:string):DOMMaLi`**<br>
 
 ### Attributes ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`attr (Attribute:string, newValue?:any):DOMMaLi|string|undefined`**<br>
+* **`hasAttr (Attribute:string):boolean`**<br>
+* **`removeAttr (Attribute:string):DOMMaLi`**<br>
 
 ### CSS ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`css (Property:string|string, newValue?:string):DOMMaLi|string|undefined`**<br>
+* **`css (PropertyList:string[]):PlainObject|undefined`**<br>
+* **`css (PropertySet:PlainObject):DOMMaLi`**<br>
 
 ### Contents ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`html (newValue?:string):DOMMaLi|string|undefined`**<br>
+* **`text (newValue?:string):DOMMaLi|string|undefined`**<br>
+* **`appendText (Value:string):DOMMaLi`**<br>
+* **`prependText (Value:string):DOMMaLi`**<br>
 
 ### Event Handling ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`on (Events:string, Handler:Function):DOMMaLi`**<br>
+* **`on (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>
+* **`on (Events:string, Selector:string|String|null, Data:any, Handler:Function):DOMMaLi`**<br>
+* **`once (Events:string, Handler:Function):DOMMaLi`**<br>
+* **`once (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>
+* **`once (Events:string, Selector:string|String|null, Data:any, Handler:Function):DOMMaLi`**<br>
+* **`off ():DOMMaLi`**<br>
+* **`off (Events:string):DOMMaLi`**<br>
+* **`off (Events:string, Selector:string|String|null):DOMMaLi`**<br>
+* **`off (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>
+* **`trigger (Event:string|Event, extraParameters?:any):boolean`**<br>
 
 ### Focus Handling ###
 
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
-* **`dommali():DOMMaLi`**<br>
+* **`focus ():DOMMaLi`**<br>
+* **`blur ():DOMMaLi`**<br>
+* **`hasFocus ():boolean`**<br>
 
 ### CSS Transitions ###
 
-* **`dommali():DOMMaLi`**<br>
+* **`transition (Settings:PlainObject, Options?:PlainObject):DOMMaLi`**<br>
 
 ## Build Instructions ##
 
