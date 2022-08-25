@@ -1359,12 +1359,15 @@
   }
 
   export default function dommali (
-    Value:Function|string|String|DOMMaLi|Element
+    Value:Function|string|String|DOMMaLi|Element|Element[]
   ):DOMMaLi|typeof DOMMaLi {
-    if (typeof Value === 'function') {
-      return DOMMaLi.ready(Value as Function)
-    } else {
-      return new _DOMMaLi(Value as any)
+    switch (true) {
+      case (typeof Value === 'function'):
+        return DOMMaLi.ready(Value as Function)
+      case ValueIsArray(Value):
+        return new _DOMMaLi(asArray(Value as Element[]))
+      default:
+        return new _DOMMaLi(Value as any)
     }
   }
 
