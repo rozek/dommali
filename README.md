@@ -100,8 +100,9 @@ The signatures shown below are those used by TypeScript
 
 ### Content Iterators ###
 
-* **`forEach (Callback:Function):DOMMaLi`**<br>
-* **`filter (SelectorOrCallback:string|String|Function):DOMMaLi`**<br>
+* **`forEach (Callback:(Item:DOMMaLi, Index:number, Container:DOMMaLi) => any):DOMMaLi`**<br>iterates over all DOM elements represented by _this_ `dommali` object and invokes the given `Callback` function with the following arguments:<br>a `dommali` object representing the current DOM element, its index in the list of DOM elements represented by _this_ `dommali` object and that object itself. **In contrast to jQuery and many other similar libraries, `this` is _not_ bound to the current DOM element - for that reason, "fat arrow" functions work as intended when passed as a callback**
+* **`filter (Selector:string|String):DOMMaLi`**<br>returns a new `dommali` object representing only those DOM elements from _this_ `dommali` object which match the given CSS selector 
+* **`filter (Callback:(Item:DOMMaLi, Index:number, Container:DOMMaLi) => boolean):DOMMaLi`**<br>returns a new `dommali` object representing only those DOM elements from _this_ `dommali` object for which the given `Callback` function returns true. This function is invoked with the following arguments:<br>a `dommali` object representing the current DOM element, its index in the list of DOM elements represented by _this_ `dommali` object and that object itself. **In contrast to jQuery and many other similar libraries, `this` is _not_ bound to the current DOM element - for that reason, "fat arrow" functions work as intended when passed as a callback**
 
 ### CSS Queries ###
 
