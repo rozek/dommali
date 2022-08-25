@@ -70,12 +70,12 @@ The signatures shown below are those used by TypeScript
 
 ### Factory Function ###
 
-* **`dommali():DOMMaLi`**<br>returns an empty `dommali` object, i.e., one that represents no DOM element
+* **`dommali():DOMMaLi`**<br>returns a new empty `dommali` object, i.e., one that represents no DOM element
 * **`dommali(startup:Function):typeof DOMMaLi`**<br>is a shortcut for `DOMMaLi.ready(startup)` (see below)
 * **`dommali(selector:string):DOMMaLi`**<br>returns a `dommali` object representing all DOM elements matching the given CSS selector
-* **`dommali(html:string):DOMMaLi`**<br>returns a `dommali` object representing all DOM elements created from the given HTML code
-* **`dommali(element:Element):DOMMaLi`**<br>returns a `dommali` object representing the given DOM element
-* **`dommali(elements:Element[]):DOMMaLi`**<br>returns a `dommali` object representing the given DOM elements (in the given order)
+* **`dommali(html:string):DOMMaLi`**<br>returns a new `dommali` object representing all DOM elements created from the given HTML code
+* **`dommali(element:Element):DOMMaLi`**<br>returns a new `dommali` object representing the given DOM element
+* **`dommali(elements:Element[]):DOMMaLi`**<br>returns a new `dommali` object representing the given DOM elements (in the given order)
 * **`dommali(bridge:DOMMaLi):DOMMaLi`**<br>returns a duplicate of the given `dommali` object
 
 ### Class Method ###
