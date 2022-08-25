@@ -148,10 +148,10 @@ The signatures shown below are those used by TypeScript
 
 ### Scrolling ###
 
-* **`scrollLeft ():number|undefined`**<br>
-* **`scrollTop ():number|undefined`**<br>
-* **`scrollRight ():number|undefined`**<br>
-* **`scrollBottom ():number|undefined`**<br>
+* **`scrollLeft (newValue?:number):number|DOMMaLi|undefined`**<br>
+* **`scrollTop (newValue?:number):number|DOMMaLi|undefined`**<br>
+* **`scrollWidth ():number|undefined`**<br>
+* **`scrollHeight ():number|undefined`**<br>
 * **`scrollTo (x:number, y:number, Mode:'instant'|'smooth'|'auto' = 'auto'):DOMMaLi`**<br>
 
 ### CSS Class Management ###
