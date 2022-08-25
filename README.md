@@ -143,8 +143,8 @@ The signatures shown below are those used by TypeScript
 
 ### Visibility ###
 
-* **`show (DisplaySetting?:string):DOMMaLi`**<br>
-* **`hide ():DOMMaLi`**<br>
+* **`show ():DOMMaLi`**<br>makes all DOM elements represented by _this_ `dommali` object visible by setting their CSS property `display` to a value different from `none` - if possible, `dommali` tries to restore any setting that was active before an element was hidden. Otherwise, it uses the default setting for the given element tag - or `block` if all fails
+* **`hide ():DOMMaLi`**<br>makes all DOM elements represented by _this_ `dommali` object invisible by setting their CSS property `display` to `none`
 
 ### Scrolling ###
 
