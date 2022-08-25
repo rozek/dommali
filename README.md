@@ -80,7 +80,7 @@ The signatures shown below are those used by TypeScript
 
 ### Class Method ###
 
-* **`DOMMaLi.ready(startup:Function):typeof DOMMaLi`**<br>
+* **`DOMMaLi.ready(startup:Function):typeof DOMMaLi`**<br>registers a function which is to be called as soon as the DOM is ready (i.e., all DOM elements are present although images and other resources may not be completely loaded). If the DOM is ready at the moment the startup functions wants to be registered, it will be invoked immediately. It is safe to register new startup functions at any time - even while they are being executed
 
 ### Object Inspection ###
 
