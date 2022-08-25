@@ -1,0 +1,140 @@
+declare type Primitive = null | undefined | boolean | number | string;
+declare type PlainObject = Record<string, Primitive>;
+declare abstract class DOMMaLi {
+    protected Subjects: Element[];
+    /**** ready - similar to jQuery.ready ****/
+    static ready(this: typeof DOMMaLi, FunctionToCall: Function): typeof DOMMaLi;
+    /**** get length ****/
+    get length(): number;
+    /**** size ****/
+    size(this: DOMMaLi): number;
+    /**** isEmpty ****/
+    isEmpty(this: DOMMaLi): boolean;
+    /**** subjects ****/
+    subjects(this: DOMMaLi): Element[];
+    /**** subject ****/
+    subject(this: DOMMaLi, Index: number): Element | undefined;
+    /**** indexOf ****/
+    indexOf(this: DOMMaLi, Value: Element | DOMMaLi): number;
+    /**** slice ****/
+    slice(this: DOMMaLi, start?: number, end?: number): DOMMaLi;
+    /**** first ****/
+    first(this: DOMMaLi): DOMMaLi;
+    /**** last ****/
+    last(this: DOMMaLi): DOMMaLi;
+    /**** eq ****/
+    eq(this: DOMMaLi, Index: number): DOMMaLi;
+    /**** forEach ****/
+    forEach(this: DOMMaLi, Callback: Function): DOMMaLi;
+    /**** filter ****/
+    filter(this: DOMMaLi, SelectorOrCallback: string | String | Function): DOMMaLi;
+    /**** matches ****/
+    matches(this: DOMMaLi, Selector: string | String): boolean;
+    /**** find ****/
+    find(this: DOMMaLi, Selector: string | String): DOMMaLi;
+    /**** findFirst ****/
+    findFirst(this: DOMMaLi, Selector: string | String): DOMMaLi;
+    /**** parent ****/
+    parent(this: DOMMaLi): DOMMaLi;
+    /**** closest ****/
+    closest(this: DOMMaLi, Selector: string | String): DOMMaLi;
+    /**** isAttached ****/
+    isAttached(this: DOMMaLi): boolean;
+    /**** contains ****/
+    contains(this: DOMMaLi, Candidate: DOMMaLi): boolean;
+    /**** children ****/
+    children(this: DOMMaLi, Selector?: string | String): DOMMaLi;
+    /**** firstChild ****/
+    firstChild(this: DOMMaLi, Selector?: string | String): DOMMaLi;
+    /**** lastChild ****/
+    lastChild(this: DOMMaLi, Selector?: string | String): DOMMaLi;
+    /**** prev ****/
+    prev(this: DOMMaLi, Selector?: string | String): DOMMaLi;
+    /**** next ****/
+    next(this: DOMMaLi, Selector?: string | String): DOMMaLi;
+    /**** positionInViewport ****/
+    positionInViewport(this: DOMMaLi): {
+        left: number;
+        top: number;
+    } | undefined;
+    /**** positionInParent ****/
+    positionInParent(this: DOMMaLi): {
+        left: number;
+        top: number;
+    } | undefined;
+    /**** positionOnPage ****/
+    positionOnPage(this: DOMMaLi): {
+        left: number;
+        top: number;
+    } | undefined;
+    /**** width ****/
+    width(this: DOMMaLi, newValue?: number): number | DOMMaLi | undefined;
+    /**** height ****/
+    height(this: DOMMaLi, newValue?: number): number | DOMMaLi | undefined;
+    /**** show ****/
+    show(this: DOMMaLi, DisplaySetting?: string): DOMMaLi;
+    /**** hide ****/
+    hide(this: DOMMaLi): DOMMaLi;
+    /**** hasClass ****/
+    hasClass(this: DOMMaLi, Classes: string): boolean;
+    /**** addClass ****/
+    addClass(this: DOMMaLi, Classes: string): DOMMaLi;
+    /**** toggleClass ****/
+    toggleClass(this: DOMMaLi, Classes: string): DOMMaLi;
+    /**** removeClass ****/
+    removeClass(this: DOMMaLi, Classes: string): DOMMaLi;
+    /**** _processClasses ****/
+    private _processClasses;
+    /**** append ****/
+    append(this: DOMMaLi, Content: string | String | DOMMaLi | Element | Element[]): DOMMaLi;
+    /**** prepend ****/
+    prepend(this: DOMMaLi, Content: string | String | DOMMaLi | Element | Element[]): DOMMaLi;
+    /**** insertAfter ****/
+    insertAfter(this: DOMMaLi, Content: DOMMaLi): DOMMaLi;
+    /**** insertBefore ****/
+    insertBefore(this: DOMMaLi, Content: DOMMaLi): DOMMaLi;
+    /**** _insert ****/
+    private _insert;
+    /**** replaceWith ****/
+    replaceWith(this: DOMMaLi, Replacement: string | String | DOMMaLi | Element | Element[]): void;
+    /**** remove ****/
+    remove(this: DOMMaLi): DOMMaLi;
+    /**** attr ****/
+    attr(this: DOMMaLi, Attribute: string, newValue?: any): DOMMaLi | string | undefined;
+    /**** hasAttr ****/
+    hasAttr(this: DOMMaLi, Attribute: string): boolean;
+    /**** removeAttr ****/
+    removeAttr(this: DOMMaLi, Attribute: string): DOMMaLi;
+    /**** css ****/
+    css(this: DOMMaLi, PropertyOrListOrSet: string | string[] | PlainObject, newValue?: string): DOMMaLi | string | PlainObject | undefined;
+    /**** html ****/
+    html(this: DOMMaLi, newValue?: string): DOMMaLi | string | undefined;
+    /**** text ****/
+    text(this: DOMMaLi, newValue?: string): DOMMaLi | string | undefined;
+    /**** appendText ****/
+    appendText(this: DOMMaLi, Value: string): DOMMaLi;
+    /**** prependText ****/
+    prependText(this: DOMMaLi, Value: string): DOMMaLi;
+    /**** on ****/
+    on(this: DOMMaLi, Events: string, SelectorOrHandler: string | String | null | Function, DataOrHandler?: any, Handler?: Function): DOMMaLi;
+    /**** once ****/
+    once(this: DOMMaLi, Events: string, SelectorOrHandler: string | String | null | Function, DataOrHandler?: any, Handler?: Function): DOMMaLi;
+    /**** _registerEventHandler ****/
+    private _registerEventHandler;
+    /**** __registerEventHandler - on DOM element rather than DOMMaLi object ****/
+    private __registerEventHandler;
+    /**** off ****/
+    off(this: DOMMaLi, Events?: string, SelectorOrHandler?: string | String | null | Function, Handler?: Function): DOMMaLi;
+    /**** _unregisterAllEventHandlersMatching ****/
+    private _unregisterAllEventHandlersMatching;
+    /**** _unregisterHandlersForEventMatching ****/
+    private _unregisterHandlersForEventMatching;
+    /**** _unregisterHandlersForEventSelectorsMatching ****/
+    private _unregisterHandlersForEventSelectorsMatching;
+    /**** trigger ****/
+    trigger(this: DOMMaLi, Event: string | Event, extraParameters?: any): boolean;
+    /**** transition ****/
+    transition(this: DOMMaLi, Settings: PlainObject, Options?: PlainObject): DOMMaLi;
+}
+export default function dommali(Value: Function | string | String | DOMMaLi | Element): DOMMaLi | typeof DOMMaLi;
+export {};
