@@ -534,7 +534,7 @@
 
   /**** show ****/
 
-    show (this:DOMMaLi, DisplaySetting?:string):DOMMaLi {
+    show (this:DOMMaLi):DOMMaLi {
       this.Subjects.forEach((Subject:indexableElement) => {
         if (Subject instanceof HTMLElement) {
           let computedStyle = getComputedStyle(Subject)
