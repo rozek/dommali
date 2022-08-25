@@ -84,12 +84,12 @@ The signatures shown below are those used by TypeScript
 
 ### Object Inspection ###
 
-* **`get length ():number`**<br>
-* **`size ():number`**<br>
-* **`isEmpty ():boolean`**<br>
-* **`subjects ():Element[]`**<br>
-* **`subject (Index:number):Element|undefined`**<br>
-* **`indexOf (Value:Element|DOMMaLi):number`**<br>
+* **`get length ():number`**<br>contains the number of DOM elements represented by this `dommali` object
+* **`size ():number`**<br>returns the number of DOM elements represented by this `dommali` object
+* **`isEmpty ():boolean`**<br>returns `true` if this `dommali` object does not represent any DOM element - or `false` otherwise
+* **`subjects ():Element[]`**<br>returns a copy of the list of DOM elements represented by this `dommali` object
+* **`subject (Index:number):Element|undefined`**<br>returns the single item found at index `Index` in the list of DOM elements represented by this `dommali` object - or `undefined` if no such item exists
+* **`indexOf (Value:Element|DOMMaLi):number`**<br>looks for the given DOM element or the first element represented by the _given_ `dommali` object in the list of DOM elements represented by _this_ `dommali` object and returns its index - or `-1` if the element can not be found
 
 ### Element Extraction ###
 
