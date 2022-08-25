@@ -8,6 +8,8 @@ The use of jQuery makes DOM manipulation code compact and legible - but it is a 
 
 > Important: `dommali` is no drop-in replacement for jQuery! If you need something like that, look for [Zepto.js](https://github.com/ZeptoJS/Zepto.js), [Cash](https://github.com/fabiospampinato/cash), [UmbrellaJS](https://github.com/franciscop/umbrella), [Chibi](https://github.com/kylebarrow/chibi) or similar
 
+**NPM users**: please consider the [Github README](https://github.com/rozek/dommali/blob/main/README.md) for the latest description of this package (as updating the docs would otherwise always require a new NPM package version)
+
 
 
 
