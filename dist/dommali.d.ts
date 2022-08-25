@@ -52,25 +52,38 @@ declare abstract class DOMMaLi {
     prev(this: DOMMaLi, Selector?: string | String): DOMMaLi;
     /**** next ****/
     next(this: DOMMaLi, Selector?: string | String): DOMMaLi;
-    /**** positionInViewport ****/
+    /**** positionInViewport - CONSIDERING transforms! ****/
     positionInViewport(this: DOMMaLi): {
         left: number;
         top: number;
     } | undefined;
-    /**** positionInParent ****/
+    /**** positionInParent - without taking transforms into account ****/
     positionInParent(this: DOMMaLi): {
         left: number;
         top: number;
     } | undefined;
-    /**** positionOnPage ****/
+    /**** positionOnPage - without taking transforms into account ****/
     positionOnPage(this: DOMMaLi): {
         left: number;
         top: number;
     } | undefined;
-    /**** width ****/
+    /**** width - without taking transforms into account ****/
     width(this: DOMMaLi, newValue?: number): number | DOMMaLi | undefined;
-    /**** height ****/
+    /**** height - without taking transforms into account ****/
     height(this: DOMMaLi, newValue?: number): number | DOMMaLi | undefined;
+    /**** innerWidth/Height - without taking transforms into account ****/
+    innerWidth(this: DOMMaLi): number | undefined;
+    innerHeight(this: DOMMaLi): number | undefined;
+    /**** renderWidth/Height - CONSIDERING transforms ****/
+    renderWidth(this: DOMMaLi): number | undefined;
+    renderHeight(this: DOMMaLi): number | undefined;
+    /**** scrollLeft/Top/Width/Height ****/
+    scrollLeft(this: DOMMaLi): number | undefined;
+    scrollTop(this: DOMMaLi): number | undefined;
+    scrollWidth(this: DOMMaLi): number | undefined;
+    scrollHeight(this: DOMMaLi): number | undefined;
+    /**** scrollTo ****/
+    scrollTo(this: DOMMaLi, x: number, y: number, Mode?: 'instant' | 'smooth' | 'auto'): DOMMaLi;
     /**** show ****/
     show(this: DOMMaLi, DisplaySetting?: string): DOMMaLi;
     /**** hide ****/
@@ -99,6 +112,18 @@ declare abstract class DOMMaLi {
     replaceWith(this: DOMMaLi, Replacement: string | String | DOMMaLi | Element | Element[]): void;
     /**** remove ****/
     remove(this: DOMMaLi): DOMMaLi;
+    /**** prop ****/
+    prop(this: DOMMaLi, Property: string, newValue?: any): DOMMaLi | any | undefined;
+    /**** hasProp ****/
+    hasProp(this: DOMMaLi, Property: string): boolean;
+    /**** removeProp ****/
+    removeProp(this: DOMMaLi, Property: string): DOMMaLi;
+    /**** data - not restricted to strings ****/
+    data(this: DOMMaLi, Key: string, newValue?: any): DOMMaLi | any | undefined;
+    /**** hasData ****/
+    hasData(this: DOMMaLi, Key: string): boolean;
+    /**** removeData ****/
+    removeData(this: DOMMaLi, Key: string): DOMMaLi;
     /**** attr ****/
     attr(this: DOMMaLi, Attribute: string, newValue?: any): DOMMaLi | string | undefined;
     /**** hasAttr ****/
@@ -133,6 +158,12 @@ declare abstract class DOMMaLi {
     private _unregisterHandlersForEventSelectorsMatching;
     /**** trigger ****/
     trigger(this: DOMMaLi, Event: string | Event, extraParameters?: any): boolean;
+    /**** focus ****/
+    focus(this: DOMMaLi): DOMMaLi;
+    /**** blur ****/
+    blur(this: DOMMaLi): DOMMaLi;
+    /**** hasFocus ****/
+    hasFocus(this: DOMMaLi): boolean;
     /**** transition ****/
     transition(this: DOMMaLi, Settings: PlainObject, Options?: PlainObject): DOMMaLi;
 }

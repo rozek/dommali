@@ -274,7 +274,7 @@ var DOMMaLi = /** @class */ (function () {
             return new _DOMMaLi();
         }
     };
-    /**** positionInViewport ****/
+    /**** positionInViewport - CONSIDERING transforms! ****/
     DOMMaLi.prototype.positionInViewport = function () {
         if (this.Subjects.length === 0) {
             return undefined;
@@ -282,39 +282,34 @@ var DOMMaLi = /** @class */ (function () {
         var Bounds = this.Subjects[0].getBoundingClientRect();
         return { left: Bounds.left, top: Bounds.top };
     };
-    /**** positionInParent ****/
+    /**** positionInParent - without taking transforms into account ****/
     DOMMaLi.prototype.positionInParent = function () {
-        if ((this.Subjects.length === 0) || (this.Subjects[0].parentElement == null)) {
+        if ((this.Subjects.length === 0) ||
+            (this.Subjects[0].parentElement == null) ||
+            (!(this.Subjects[0] instanceof HTMLElement))) {
             return undefined;
         }
         var Subject = this.Subjects[0];
-        if (Subject instanceof HTMLElement) {
-            return {
-                left: Subject.offsetLeft,
-                top: Subject.offsetTop
-            };
-        }
-        else {
-            var SVGBounds = Subject.getBoundingClientRect();
-            var ParentBounds = Subject.parentElement.getBoundingClientRect();
-            return {
-                left: SVGBounds.left - ParentBounds.left,
-                top: SVGBounds.top - ParentBounds.top
-            };
-        }
+        return (Subject instanceof HTMLElement
+            ? { left: Subject.offsetLeft, top: Subject.offsetTop }
+            : undefined);
     };
-    /**** positionOnPage ****/
+    /**** positionOnPage - without taking transforms into account ****/
     DOMMaLi.prototype.positionOnPage = function () {
         if (this.Subjects.length === 0) {
             return undefined;
         }
-        var Bounds = this.Subjects[0].getBoundingClientRect();
-        return {
-            left: Bounds.left + window.scrollX,
-            top: Bounds.top + window.scrollY
-        };
+        var Element = this.Subjects[0], left = 0, top = 0;
+        while (Element instanceof HTMLElement) {
+            left += Element.offsetLeft;
+            top += Element.offsetTop;
+            Element = Element.offsetParent;
+        }
+        return { left: left, top: top };
     };
-    /**** width ****/
+    // see https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
+    // and https://jsbin.com/kimaxojufe/1/edit?css,js,console,output
+    /**** width - without taking transforms into account ****/
     DOMMaLi.prototype.width = function (newValue) {
         if (newValue === undefined) {
             var Subject = this.Subjects[0];
@@ -334,7 +329,7 @@ var DOMMaLi = /** @class */ (function () {
             return this;
         }
     };
-    /**** height ****/
+    /**** height - without taking transforms into account ****/
     DOMMaLi.prototype.height = function (newValue) {
         if (newValue === undefined) {
             var Subject = this.Subjects[0];
@@ -353,6 +348,58 @@ var DOMMaLi = /** @class */ (function () {
             });
             return this;
         }
+    };
+    /**** innerWidth/Height - without taking transforms into account ****/
+    DOMMaLi.prototype.innerWidth = function () {
+        return (this.Subjects.length === 0
+            ? undefined
+            : this.Subjects[0].clientWidth);
+    };
+    DOMMaLi.prototype.innerHeight = function () {
+        return (this.Subjects.length === 0
+            ? undefined
+            : this.Subjects[0].clientHeight);
+    };
+    /**** renderWidth/Height - CONSIDERING transforms ****/
+    DOMMaLi.prototype.renderWidth = function () {
+        return (this.Subjects.length === 0
+            ? undefined
+            : this.Subjects[0].getBoundingClientRect().width);
+    };
+    DOMMaLi.prototype.renderHeight = function () {
+        return (this.Subjects.length === 0
+            ? undefined
+            : this.Subjects[0].getBoundingClientRect().height);
+    };
+    /**** scrollLeft/Top/Width/Height ****/
+    DOMMaLi.prototype.scrollLeft = function () {
+        return (this.Subjects.length === 0
+            ? undefined
+            : this.Subjects[0].scrollLeft);
+    };
+    DOMMaLi.prototype.scrollTop = function () {
+        return (this.Subjects.length === 0
+            ? undefined
+            : this.Subjects[0].scrollTop);
+    };
+    DOMMaLi.prototype.scrollWidth = function () {
+        return (this.Subjects.length === 0
+            ? undefined
+            : this.Subjects[0].scrollWidth);
+    };
+    DOMMaLi.prototype.scrollHeight = function () {
+        return (this.Subjects.length === 0
+            ? undefined
+            : this.Subjects[0].scrollHeight);
+    };
+    /**** scrollTo ****/
+    DOMMaLi.prototype.scrollTo = function (x, y, Mode) {
+        if (Mode === void 0) { Mode = 'auto'; }
+        var Options = { left: x, top: y, behavior: Mode };
+        this.Subjects.forEach(function (Subject) {
+            Subject.scrollTo(Options);
+        });
+        return this;
     };
     /**** show ****/
     DOMMaLi.prototype.show = function (DisplaySetting) {
@@ -482,6 +529,65 @@ var DOMMaLi = /** @class */ (function () {
         }
         this.Subjects.forEach(function (Subject) {
             Subject.remove();
+        });
+        return this;
+    };
+    /**** prop ****/
+    DOMMaLi.prototype.prop = function (Property, newValue) {
+        if (newValue === undefined) {
+            return (this.Subjects.length === 0
+                ? undefined
+                : this.Subjects[0][Property]);
+        }
+        else {
+            this.Subjects.forEach(function (Subject) {
+                Subject[Property] = newValue;
+            });
+            return this;
+        }
+    };
+    /**** hasProp ****/
+    DOMMaLi.prototype.hasProp = function (Property) {
+        return (this.Subjects.length === 0
+            ? false
+            : Property in this.Subjects[0]);
+    };
+    /**** removeProp ****/
+    DOMMaLi.prototype.removeProp = function (Property) {
+        this.Subjects.forEach(function (Subject) {
+            delete Subject[Property];
+        });
+        return this;
+    };
+    /**** data - not restricted to strings ****/
+    DOMMaLi.prototype.data = function (Key, newValue) {
+        if (newValue === undefined) {
+            return ((this.Subjects.length === 0) || (this.Subjects[0]['_data'] == null)
+                ? undefined
+                : this.Subjects[0]['_data'][Key]);
+        }
+        else {
+            this.Subjects.forEach(function (Subject) {
+                if (Subject['_data'] == null) {
+                    Subject['_data'] = Object.create(null);
+                }
+                Subject['_data'][Key] = newValue;
+            });
+            return this;
+        }
+    };
+    /**** hasData ****/
+    DOMMaLi.prototype.hasData = function (Key) {
+        return ((this.Subjects.length > 0) &&
+            (this.Subjects[0]['_data'] != null) &&
+            (Key in this.Subjects[0]['_data']));
+    };
+    /**** removeData ****/
+    DOMMaLi.prototype.removeData = function (Key) {
+        this.Subjects.forEach(function (Subject) {
+            if (Subject['_data'] != null) {
+                delete Subject['_data'][Key];
+            }
         });
         return this;
     };
@@ -815,6 +921,24 @@ var DOMMaLi = /** @class */ (function () {
             return Subject.dispatchEvent(Event) && Result;
         }, true);
     };
+    /**** focus ****/
+    DOMMaLi.prototype.focus = function () {
+        if ((this.Subjects.length > 0) && (this.Subjects[0] instanceof HTMLElement)) {
+            this.Subjects[0].focus();
+        }
+        return this;
+    };
+    /**** blur ****/
+    DOMMaLi.prototype.blur = function () {
+        if ((this.Subjects.length > 0) && (this.Subjects[0] instanceof HTMLElement)) {
+            this.Subjects[0].blur();
+        }
+        return this;
+    };
+    /**** hasFocus ****/
+    DOMMaLi.prototype.hasFocus = function () {
+        return (document.activeElement === this.Subjects[0]);
+    };
     /**** transition ****/
     DOMMaLi.prototype.transition = function (Settings, Options) {
         if (this.Subjects.length === 0) {
@@ -865,6 +989,16 @@ var DOMMaLi = /** @class */ (function () {
     };
     return DOMMaLi;
 }());
+/**** apply any synonyms ****/
+Object.assign(DOMMaLi.prototype, {
+    renderPositionInViewport: DOMMaLi.prototype.positionInViewport,
+    layoutPositionInParent: DOMMaLi.prototype.positionInParent,
+    layoutPositionOnPage: DOMMaLi.prototype.positionOnPage,
+    layoutWidth: DOMMaLi.prototype.width,
+    layoutHeight: DOMMaLi.prototype.height,
+    outerWidth: DOMMaLi.prototype.width,
+    outerHeight: DOMMaLi.prototype.height,
+});
 /**** startup function handling ****/
 var DOMisReady = (document.readyState !== 'loading');
 if (!DOMisReady) {
