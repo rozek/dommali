@@ -38,6 +38,21 @@ How to access the package depends on the type of module you prefer
 
 Alternatively, you may access the global variable `dommali` directly.
 
+## Usage within Svelte ##
+
+For Svelte, it is recommended to import the package in a module context. From then on, its exports may be used as usual:
+
+```html
+<script context="module">
+  import dommali from 'dommali'
+</script>
+
+<script>
+  const $ = dommali // make "dommali" calls look like "jQuery" ones
+  $(document.body).html('<h1>Hello, World!</h1>')
+</script>
+```
+
 
 
 
