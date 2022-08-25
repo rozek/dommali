@@ -28,6 +28,16 @@ or load the plain script file directly
 <script src="https://unpkg.com/dommali"></script>
 ```
 
+## Access ##
+
+How to access the package depends on the type of module you prefer
+
+* ESM (or Svelte): `import dommali from 'dommali'`
+* CommonJS: `const dommali = require('dommali')`
+* AMD: `require(['dommali'], (dommali) => {...})`
+
+Alternatively, you may access the global variable `dommali` directly.
+
 
 
 
