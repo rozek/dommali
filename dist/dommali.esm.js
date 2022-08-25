@@ -1058,11 +1058,13 @@ var _DOMMaLi = /** @class */ (function (_super) {
     return _DOMMaLi;
 }(DOMMaLi));
 function dommali(Value) {
-    if (typeof Value === 'function') {
-        return DOMMaLi.ready(Value);
-    }
-    else {
-        return new _DOMMaLi(Value);
+    switch (true) {
+        case (typeof Value === 'function'):
+            return DOMMaLi.ready(Value);
+        case ValueIsArray(Value):
+            return new _DOMMaLi(asArray(Value));
+        default:
+            return new _DOMMaLi(Value);
     }
 }
 Object.assign(dommali, { ready: DOMMaLi.ready });

@@ -167,5 +167,5 @@ declare abstract class DOMMaLi {
     /**** transition ****/
     transition(this: DOMMaLi, Settings: PlainObject, Options?: PlainObject): DOMMaLi;
 }
-export default function dommali(Value: Function | string | String | DOMMaLi | Element): DOMMaLi | typeof DOMMaLi;
+export default function dommali(Value: Function | string | String | DOMMaLi | Element | Element[]): DOMMaLi | typeof DOMMaLi;
 export {};
