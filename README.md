@@ -62,8 +62,55 @@ const $ = dommali // make "dommali" calls look like "jQuery" ones
 $(document.body).html('<h1>Hello, World!</h1>')
 ```
 
+## API Reference ##
 
+### Factory Function ###
 
+* **`dommali():DOMMaLi`**<br>
+* **`dommali(startup:Function):typeof DOMMaLi`**<br>
+* **`dommali(selector:string):DOMMaLi`**<br>
+* **`dommali(html:string):DOMMaLi`**<br>
+* **`dommali(element:Element):DOMMaLi`**<br>
+* **`dommali(elements:Element[]):DOMMaLi`**<br>
+* **`dommali(bridge:DOMMaLi):DOMMaLi`**<br>
+
+### Class Method ###
+
+* **`DOMMaLi.ready(startup:Function):typeof DOMMaLi`**<br>
+
+### Object Inspection ###
+
+### Element Extraction ###
+
+### Content Iterators ###
+
+### CSS Queries ###
+
+### Position and Size ###
+
+### DOM Hierarchy ###
+
+### Visibility ###
+
+### CSS Class Management ###
+
+### Insertion and Removal ###
+
+### Properties ###
+
+### Data ###
+
+### Attributes ###
+
+### CSS ###
+
+### Contents ###
+
+### Event Handling ###
+
+### Focus Handling ###
+
+### CSS Transitions ###
 
 
 
