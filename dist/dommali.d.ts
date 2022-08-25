@@ -78,8 +78,8 @@ declare abstract class DOMMaLi {
     renderWidth(this: DOMMaLi): number | undefined;
     renderHeight(this: DOMMaLi): number | undefined;
     /**** scrollLeft/Top/Width/Height ****/
-    scrollLeft(this: DOMMaLi): number | undefined;
-    scrollTop(this: DOMMaLi): number | undefined;
+    scrollLeft(this: DOMMaLi, newValue?: number): number | DOMMaLi | undefined;
+    scrollTop(this: DOMMaLi, newValue?: number): number | DOMMaLi | undefined;
     scrollWidth(this: DOMMaLi): number | undefined;
     scrollHeight(this: DOMMaLi): number | undefined;
     /**** scrollTo ****/

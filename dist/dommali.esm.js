@@ -372,15 +372,31 @@ var DOMMaLi = /** @class */ (function () {
             : this.Subjects[0].getBoundingClientRect().height);
     };
     /**** scrollLeft/Top/Width/Height ****/
-    DOMMaLi.prototype.scrollLeft = function () {
-        return (this.Subjects.length === 0
-            ? undefined
-            : this.Subjects[0].scrollLeft);
+    DOMMaLi.prototype.scrollLeft = function (newValue) {
+        if (newValue === undefined) {
+            return (this.Subjects.length === 0
+                ? undefined
+                : this.Subjects[0].scrollLeft);
+        }
+        else {
+            this.Subjects.forEach(function (Subject) {
+                Subject.scrollLeft = newValue;
+            });
+            return this;
+        }
     };
-    DOMMaLi.prototype.scrollTop = function () {
-        return (this.Subjects.length === 0
-            ? undefined
-            : this.Subjects[0].scrollTop);
+    DOMMaLi.prototype.scrollTop = function (newValue) {
+        if (newValue === undefined) {
+            return (this.Subjects.length === 0
+                ? undefined
+                : this.Subjects[0].scrollTop);
+        }
+        else {
+            this.Subjects.forEach(function (Subject) {
+                Subject.scrollTop = newValue;
+            });
+            return this;
+        }
     };
     DOMMaLi.prototype.scrollWidth = function () {
         return (this.Subjects.length === 0
