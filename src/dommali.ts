@@ -358,7 +358,7 @@
       }
     }
 
-  /**** positionInViewport ****/
+  /**** positionInViewport - CONSIDERING transforms! ****/
 
     positionInViewport (this:DOMMaLi):{ left:number,top:number }|undefined {
       if (this.Subjects.length === 0) {
@@ -369,45 +369,46 @@
       return { left:Bounds.left, top:Bounds.top }
     }
 
-  /**** positionInParent ****/
+  /**** positionInParent - without taking transforms into account ****/
 
     positionInParent (this:DOMMaLi):{ left:number,top:number }|undefined {
-      if ((this.Subjects.length === 0) || (this.Subjects[0].parentElement == null)) {
+      if (
+        (this.Subjects.length === 0) ||
+        (this.Subjects[0].parentElement == null) ||
+        (! (this.Subjects[0] instanceof HTMLElement))
+      ) {
         return undefined
       }
 
       let Subject = this.Subjects[0]
-      if (Subject instanceof HTMLElement) {
-        return {
-          left:Subject.offsetLeft,
-          top: Subject.offsetTop
-        }
-      } else {
-        const SVGBounds    = Subject.getBoundingClientRect()
-        const ParentBounds = (Subject.parentElement as Element).getBoundingClientRect()
-
-        return {
-          left:SVGBounds.left - ParentBounds.left,
-          top: SVGBounds.top  - ParentBounds.top
-        }
-      }
+      return (
+        Subject instanceof HTMLElement
+        ? { left:Subject.offsetLeft, top: Subject.offsetTop }
+        : undefined
+      )
     }
 
-  /**** positionOnPage ****/
+  /**** positionOnPage - without taking transforms into account ****/
 
     positionOnPage (this:DOMMaLi):{ left:number,top:number }|undefined {
       if (this.Subjects.length === 0) {
         return undefined
       }
 
-      let Bounds = this.Subjects[0].getBoundingClientRect()
-      return {
-        left:Bounds.left + window.scrollX,
-        top: Bounds.top  + window.scrollY
-      }
+      let Element = this.Subjects[0], left = 0, top = 0
+        while (Element instanceof HTMLElement) {
+          left += Element.offsetLeft
+          top  += Element.offsetTop
+
+          Element = Element.offsetParent as Element
+        }
+      return { left,top }
     }
 
-  /**** width ****/
+// see https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
+// and https://jsbin.com/kimaxojufe/1/edit?css,js,console,output
+
+  /**** width - without taking transforms into account ****/
 
     width (this:DOMMaLi, newValue?:number):number|DOMMaLi|undefined {
       if (newValue === undefined) {
@@ -427,7 +428,7 @@
       }
     }
 
-  /**** height ****/
+  /**** height - without taking transforms into account ****/
 
     height (this:DOMMaLi, newValue?:number):number|DOMMaLi|undefined {
       if (newValue === undefined) {
@@ -445,6 +446,90 @@
         })
         return this
       }
+    }
+
+  /**** innerWidth/Height - without taking transforms into account ****/
+
+    innerWidth (this:DOMMaLi):number|undefined {
+      return (
+        this.Subjects.length === 0
+        ? undefined
+        : this.Subjects[0].clientWidth
+      )
+    }
+
+    innerHeight (this:DOMMaLi):number|undefined {
+      return (
+        this.Subjects.length === 0
+        ? undefined
+        : this.Subjects[0].clientHeight
+      )
+    }
+
+  /**** renderWidth/Height - CONSIDERING transforms ****/
+
+    renderWidth (this:DOMMaLi):number|undefined {
+      return (
+        this.Subjects.length === 0
+        ? undefined
+        : this.Subjects[0].getBoundingClientRect().width
+      )
+    }
+
+    renderHeight (this:DOMMaLi):number|undefined {
+      return (
+        this.Subjects.length === 0
+        ? undefined
+        : this.Subjects[0].getBoundingClientRect().height
+      )
+    }
+
+  /**** scrollLeft/Top/Width/Height ****/
+
+    scrollLeft (this:DOMMaLi):number|undefined {
+      return (
+        this.Subjects.length === 0
+        ? undefined
+        : this.Subjects[0].scrollLeft
+      )
+    }
+
+    scrollTop (this:DOMMaLi):number|undefined {
+      return (
+        this.Subjects.length === 0
+        ? undefined
+        : this.Subjects[0].scrollTop
+      )
+    }
+
+    scrollWidth (this:DOMMaLi):number|undefined {
+      return (
+        this.Subjects.length === 0
+        ? undefined
+        : this.Subjects[0].scrollWidth
+      )
+    }
+
+    scrollHeight (this:DOMMaLi):number|undefined {
+      return (
+        this.Subjects.length === 0
+        ? undefined
+        : this.Subjects[0].scrollHeight
+      )
+    }
+
+  /**** scrollTo ****/
+
+    scrollTo (
+      this:DOMMaLi, x:number, y:number, Mode:'instant'|'smooth'|'auto' = 'auto'
+    ):DOMMaLi {
+      let Options = { left:x, top:y, behavior:Mode } as ScrollToOptions
+
+      this.Subjects.forEach((Subject:Element) => {
+        Subject.scrollTo(Options)
+      })
+
+      return this
     }
 
   /**** show ****/
@@ -611,6 +696,87 @@
         Subject.remove()
       })
 
+      return this
+    }
+
+  /**** prop ****/
+
+    prop (
+      this:DOMMaLi, Property:string, newValue?:any
+    ):DOMMaLi|any|undefined {
+      if (newValue === undefined) {
+        return (
+          this.Subjects.length === 0
+          ? undefined
+          : (this.Subjects[0] as Indexable)[Property]
+        )
+      } else {
+        this.Subjects.forEach((Subject:Indexable) => {
+          Subject[Property] = newValue
+        })
+        return this
+      }
+    }
+
+  /**** hasProp ****/
+
+    hasProp (this:DOMMaLi, Property:string):boolean {
+      return (
+        this.Subjects.length === 0
+        ? false
+        : Property in this.Subjects[0]
+      )
+    }
+
+  /**** removeProp ****/
+
+    removeProp (this:DOMMaLi, Property:string):DOMMaLi {
+      this.Subjects.forEach((Subject:Indexable) => {
+        delete Subject[Property]
+      })
+      return this
+    }
+
+  /**** data - not restricted to strings ****/
+
+    data (
+      this:DOMMaLi, Key:string, newValue?:any
+    ):DOMMaLi|any|undefined {
+      if (newValue === undefined) {
+        return (
+          (this.Subjects.length === 0) || ((this.Subjects[0] as Indexable)['_data'] == null)
+          ? undefined
+          : (this.Subjects[0] as Indexable)['_data'][Key]
+        )
+      } else {
+        this.Subjects.forEach((Subject:Indexable) => {
+          if (Subject['_data'] == null) {
+            Subject['_data'] = Object.create(null)
+          }
+          Subject['_data'][Key] = newValue
+        })
+        return this
+      }
+    }
+
+  /**** hasData ****/
+
+    hasData (this:DOMMaLi, Key:string):boolean {
+      return (
+        (this.Subjects.length > 0) &&
+        ((this.Subjects[0] as Indexable)['_data'] != null) &&
+        (Key in (this.Subjects[0] as Indexable)['_data'])
+      )
+    }
+
+  /**** removeData ****/
+
+    removeData (this:DOMMaLi, Key:string):DOMMaLi {
+      this.Subjects.forEach((Subject:Indexable) => {
+        if (Subject['_data'] != null) {
+          delete Subject['_data'][Key]
+        }
+      })
       return this
     }
 
@@ -1031,6 +1197,30 @@
       )
     }
 
+  /**** focus ****/
+
+    focus (this:DOMMaLi):DOMMaLi {
+      if ((this.Subjects.length > 0) && (this.Subjects[0] instanceof HTMLElement)) {
+        this.Subjects[0].focus()
+      }
+      return this
+    }
+
+  /**** blur ****/
+
+    blur (this:DOMMaLi):DOMMaLi {
+      if ((this.Subjects.length > 0) && (this.Subjects[0] instanceof HTMLElement)) {
+        this.Subjects[0].blur()
+      }
+      return this
+    }
+
+  /**** hasFocus ****/
+
+    hasFocus (this:DOMMaLi):boolean {
+      return (document.activeElement === this.Subjects[0])
+    }
+
   /**** transition ****/
 
     transition (
@@ -1093,6 +1283,20 @@
       return this
     }
   }
+
+/**** apply any synonyms ****/
+
+  Object.assign(DOMMaLi.prototype, {
+    renderPositionInViewport: DOMMaLi.prototype.positionInViewport,
+    layoutPositionInParent:   DOMMaLi.prototype.positionInParent,
+    layoutPositionOnPage:     DOMMaLi.prototype.positionOnPage,
+
+    layoutWidth:  DOMMaLi.prototype.width,
+    layoutHeight: DOMMaLi.prototype.height,
+
+    outerWidth:  DOMMaLi.prototype.width,
+    outerHeight: DOMMaLi.prototype.height,
+  })
 
 /**** startup function handling ****/
 
