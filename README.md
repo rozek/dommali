@@ -148,11 +148,11 @@ The signatures shown below are those used by TypeScript
 
 ### Scrolling ###
 
-* **`scrollLeft (newValue?:number):number|DOMMaLi|undefined`**<br>
-* **`scrollTop (newValue?:number):number|DOMMaLi|undefined`**<br>
-* **`scrollWidth ():number|undefined`**<br>
-* **`scrollHeight ():number|undefined`**<br>
-* **`scrollTo (x:number, y:number, Mode:'instant'|'smooth'|'auto' = 'auto'):DOMMaLi`**<br>
+* **`scrollLeft (newValue?:number):number|DOMMaLi|undefined`**<br>if no `newValue` is given, this method returns the number of pixels the first DOM element represented by this `dommali` object is scrolled from its left edge (or `undefined` if this `dommali` object is empty) Otherwise, it scrolls all DOM elements represented by this `dommali` object to a position `newValue` pixels from their left edge
+* **`scrollTop (newValue?:number):number|DOMMaLi|undefined`**<br>if no `newValue` is given, this method returns the number of pixels the first DOM element represented by this `dommali` object is scrolled from its top edge (or `undefined` if this `dommali` object is empty) Otherwise, it scrolls all DOM elements represented by this `dommali` object to a position `newValue` pixels from their top edge
+* **`scrollWidth ():number|undefined`**<br>returns the width of the contents of the first DOM element represented by this `dommali` object (or `undefined` if this `dommali` object is empty), including content not visible due to an overflow
+* **`scrollHeight ():number|undefined`**<br>returns the height of the contents of the first DOM element represented by this `dommali` object (or `undefined` if this `dommali` object is empty), including content not visible due to an overflow
+* **`scrollTo (x:number, y:number, Mode:'instant'|'smooth'|'auto' = 'auto'):DOMMaLi`**<br>scrolls all DOM elements represented by this `dommali` object to a position `x` pixels from their left and `y` pixels from their top edge. If given, `Mode` specifies whether the scrolling should animate smoothly or happen instantly in a single jump
 
 ### CSS Class Management ###
 
