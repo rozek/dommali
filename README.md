@@ -64,6 +64,8 @@ $(document.body).html('<h1>Hello, World!</h1>')
 
 ## API Reference ##
 
+The signatures shown are those used by TypeScript
+
 ### Factory Function ###
 
 * **`dommali():DOMMaLi`**<br>
@@ -80,40 +82,119 @@ $(document.body).html('<h1>Hello, World!</h1>')
 
 ### Object Inspection ###
 
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+
 ### Element Extraction ###
+
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
 
 ### Content Iterators ###
 
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+
 ### CSS Queries ###
+
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
 
 ### Position and Size ###
 
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+
 ### DOM Hierarchy ###
+
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
 
 ### Visibility ###
 
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+
 ### CSS Class Management ###
+
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
 
 ### Insertion and Removal ###
 
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+
 ### Properties ###
+
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
 
 ### Data ###
 
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+
 ### Attributes ###
+
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
 
 ### CSS ###
 
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+
 ### Contents ###
+
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
 
 ### Event Handling ###
 
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+
 ### Focus Handling ###
+
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
+* **`dommali():DOMMaLi`**<br>
 
 ### CSS Transitions ###
 
-
-
+* **`dommali():DOMMaLi`**<br>
 
 ## Build Instructions ##
 
