@@ -486,20 +486,34 @@
 
   /**** scrollLeft/Top/Width/Height ****/
 
-    scrollLeft (this:DOMMaLi):number|undefined {
-      return (
-        this.Subjects.length === 0
-        ? undefined
-        : this.Subjects[0].scrollLeft
-      )
+    scrollLeft (this:DOMMaLi, newValue?:number):number|DOMMaLi|undefined {
+      if (newValue === undefined) {
+        return (
+          this.Subjects.length === 0
+          ? undefined
+          : this.Subjects[0].scrollLeft
+        )
+      } else {
+        this.Subjects.forEach((Subject:Element) => {
+          Subject.scrollLeft = newValue
+        })
+        return this
+      }
     }
 
-    scrollTop (this:DOMMaLi):number|undefined {
-      return (
-        this.Subjects.length === 0
-        ? undefined
-        : this.Subjects[0].scrollTop
-      )
+    scrollTop (this:DOMMaLi, newValue?:number):number|DOMMaLi|undefined {
+      if (newValue === undefined) {
+        return (
+          this.Subjects.length === 0
+          ? undefined
+          : this.Subjects[0].scrollTop
+        )
+      } else {
+        this.Subjects.forEach((Subject:Element) => {
+          Subject.scrollTop = newValue
+        })
+        return this
+      }
     }
 
     scrollWidth (this:DOMMaLi):number|undefined {
