@@ -8,7 +8,7 @@ The use of jQuery makes DOM manipulation code compact and legible - but it is a 
 
 **Important: `dommali` is no drop-in replacement for jQuery!** If you need something like that, look for [Zepto.js](https://github.com/ZeptoJS/Zepto.js), [Cash](https://github.com/fabiospampinato/cash), [UmbrellaJS](https://github.com/franciscop/umbrella), [Chibi](https://github.com/kylebarrow/chibi) or similar
 
-The most notable differences between `dommali` and jQuery are:
+The most notable differences between `dommali` and jQuery (or a look-alike) are:
 
 * iterator callback functions do not bind `this` to the DOM element just processed, instead the get a corresponding `dommali` object as their first argument - as a consequence, "fat arrow" functions may more easily serve as callbacks
 * methods retrieving the current size and position of a DOM element have specific names which makes their intention more obvious even for casual programmers: f.e., `positionInViewport` vs. `positionInParent` vs. `positionOnPage`
