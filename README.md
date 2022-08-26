@@ -238,10 +238,10 @@ The signatures shown below are those used by TypeScript
 
 ### Focus Handling ###
 
-* **`focus ():DOMMaLi`**<br>**HTML elements**
-* **`blur ():DOMMaLi`**<br>**HTML elements**
-* **`hasFocus ():boolean`**<br>
-* **`focusedElement ():DOMMaLi`**<br>
+* **`focus ():DOMMaLi`**<br>grants the keyboard focus to the first DOM element represented by this `dommali` object - provided that this is an **HTML element** and is allowed to be focused. Otherwise, `focus` does nothing
+* **`blur ():DOMMaLi`**<br>removes the keyboard focus from the first DOM element represented by this `dommali` object - provided that this is an **HTML element** and is currently focused. Otherwise, `blur` does nothing
+* **`hasFocus ():boolean`**<br>returns `true`, if the first DOM element represented by this `dommali` object currently owns the keyboard focus - or `false` otherwise
+* **`focusedElement ():DOMMaLi`**<br>returns a (possible empty) `dommali` object representing the DOM element which currently owns the keyboard focus
 
 ### CSS Transitions ###
 
