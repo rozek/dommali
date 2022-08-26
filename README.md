@@ -187,8 +187,8 @@ The signatures shown below are those used by TypeScript
 * **`prepend (Content:string|String|DOMMaLi|Element|Element[]):DOMMaLi`**<br>if `Content` contains HTML code, this method inserts the DOM elements repeatedly created based on `Content` at the beginning of every DOM element represented by this `dommali` object - otherwise the DOM elements given by `Content` are inserted at the beginning of the _first_ DOM element represented by this `dommali` object only. `Content` may contain HTML code, CSS selectors, one or multiple DOM elements or another `dommali` object
 * **`insertAfter (Content:DOMMaLi):DOMMaLi`**<br>inserts all DOM elements represented by this `dommali` object after the first DOM element represented by the given `Content`. `Content` may contain HTML code, CSS selectors, one or multiple DOM elements or another `dommali` object
 * **`insertBefore (Content:DOMMaLi):DOMMaLi`**<br>inserts all DOM elements represented by this `dommali` object before the first DOM element represented by the given `Content`. `Content` may contain HTML code, CSS selectors, one or multiple DOM elements or another `dommali` object
-* **`replaceWith (Replacement:string|String|DOMMaLi|Element|Element[]):void`**<br>
-* **`remove ():DOMMaLi`**<br>
+* **`replaceWith (Replacement:string|String|DOMMaLi|Element|Element[]):void`**<br>if `Content` contains HTML code, this method replaces every DOM element represented by this `dommali` object by the DOM elements repeatedly created based on `Content` - otherwise the _first_ DOM element represented by this `dommali` object is replaced by the DOM elements given by `Content`. `Content` may contain HTML code, CSS selectors, one or multiple DOM elements or another `dommali` object
+* **`remove ():DOMMaLi`**<br>removes all DOM elements represented by this `dommali` object
 
 ### Properties ###
 
