@@ -14,6 +14,7 @@ The most notable differences between `dommali` and jQuery (or a look-alike) are:
 * methods retrieving the current size and position of a DOM element have specific names which makes their intention more obvious particularly for casual programmers: f.e., `positionInViewport` vs. `positionInParent` vs. `positionOnPage`
 * additionally, some methods have names (or synonyms) which indicate whether they return _layout_ or _render_ measures: _layout_ positions and dimensions are used by the browser layout engine and do not consider any [CSS transforms](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) applied to DOM elements, whereas _render_ measures take such transforms into account
 * `dommali` does not define its own event object - nowadays. creating DOM events is so simple that there is just no need for a wrapper. It _does_, however, support `extraParameters` passed when triggering an event and Event `data` specified while registering an event handler
+* event handler registrations support the special "selector" `@this` which effectively limits handler invocations to events directly triggered on elements with the given handler themselves - ignoring any bubbling events
 * `dommali` does not support CSS _animations_ but animated CSS transitions - and those are really simple
 
 **NPM users**: please consider the [Github README](https://github.com/rozek/dommali/blob/main/README.md) for the latest description of this package (as updating the docs would otherwise always require a new NPM package version)
@@ -223,17 +224,17 @@ The signatures shown below are those used by TypeScript
 
 ### Event Handling ###
 
-* **`on (Events:string, Handler:Function):DOMMaLi`**<br>
-* **`on (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>
-* **`on (Events:string, Selector:string|String|null, Data:any, Handler:Function):DOMMaLi`**<br>
-* **`once (Events:string, Handler:Function):DOMMaLi`**<br>
-* **`once (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>
-* **`once (Events:string, Selector:string|String|null, Data:any, Handler:Function):DOMMaLi`**<br>
-* **`off ():DOMMaLi`**<br>
-* **`off (Events:string):DOMMaLi`**<br>
-* **`off (Events:string, Selector:string|String|null):DOMMaLi`**<br>
-* **`off (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>
-* **`trigger (Event:string|Event, extraParameters?:any):boolean`**<br>
+* **`on (Events:string, Handler:Function):DOMMaLi`**<br>registers the given event handler `Handler` for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object. `Handler` will be invoked whenever one of the given `Events` is triggered on one of these DOM elements themselves or one of their descendants (if the event is allowed to "bubble"). If `Handler` returns the explicit value `false`, `Event.stopPropagation()` and `Event.preventDefault()` are called for the current event
+* **`on (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>registers the given event handler `Handler` as a "delegated event handler" for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object. `Handler` will be invoked whenever one of the given `Events` is triggered on one of these DOM elements themselves or one of their descendants (if the event is allowed to "bubble") - provided that the original event target matches the given CSS `Selector`. Setting `Selector` to `null` simply skips the matching. If `Handler` returns the explicit value `false`, `Event.stopPropagation()` and `Event.preventDefault()` are called for the current event
+* **`on (Events:string, Selector:string|String|null, Data:any, Handler:Function):DOMMaLi`**<br>registers the given event handler `Handler` (as a "delegated event handler" if `Selector` is not `null`) for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object. `Handler` will be invoked whenever one of the given `Events` is triggered on one of these DOM elements themselves or one of their descendants (if the event is allowed to "bubble") - provided that the original event target matches the given CSS `Selector`. Additionally, property `data` of the incoming event is set to `Data` before the registered handler is called. Setting `Selector` to `null` simply skips the matching. If `Handler` returns the explicit value `false`, `Event.stopPropagation()` and `Event.preventDefault()` are called for the current event
+* **`once (Events:string, Handler:Function):DOMMaLi`**<br>behaves like `once(Events,Handler)`, but automatically unregisters the given `Handler` upon its first invocation
+* **`once (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>behaves like `once(Events,Selector,Handler)`, but automatically unregisters the given `Handler` upon its first invocation
+* **`once (Events:string, Selector:string|String|null, Data:any, Handler:Function):DOMMaLi`**<br>behaves like `once(Events,Selector,Data,Handler)`, but automatically unregisters the given `Handler` upon its first invocation
+* **`off ():DOMMaLi`**<br>unregisters all event handlers registered in all DOM elements represented by this `dommali` object
+* **`off (Events:string):DOMMaLi`**<br>unregisters all event handlers registered for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object
+* **`off (Events:string, Selector:string|String|null):DOMMaLi`**<br>unregisters all event handlers registered as delegated event handlers with CSS selector `Selector` for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object
+* **`off (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>unregisters the given `Handler` registered as delegated event handler with CSS selector `Selector` for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object
+* **`trigger (Event:string|Event, extraParameters?:any[]):boolean`**<br>fires the given `Event` on all DOM elements represented by this `dommali` object. If `Event` is given as a string, a `CustomEvent` of type `Event` is created and fired. The optional argument `extraParameters` may be a single value or a list of values which are passed as additional arguments (after the event object itself) to the Handler. `trigger` returns `false` if at least one of the invoked event handlers called `Event.preventDefault()` or `true` otherwise
 
 ### Focus Handling ###
 
