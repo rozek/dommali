@@ -534,18 +534,28 @@ var DOMMaLi = /** @class */ (function () {
     };
     /**** replaceWith ****/
     DOMMaLi.prototype.replaceWith = function (Replacement) {
+        var _this = this;
         if (this.Subjects.length === 0) {
             return;
         }
-        if (!(Replacement instanceof DOMMaLi)) {
-            Replacement = new _DOMMaLi(Replacement);
-        }
-        if (Replacement.Subjects.length === 0) {
+        var Replacements = (Replacement instanceof DOMMaLi
+            ? Replacement
+            : new _DOMMaLi(Replacement));
+        if (Replacements.Subjects.length === 0) {
             this.remove();
             return;
         }
-        var Subject = this.Subjects[0];
-        Subject.replaceWith.apply(Subject, Replacement.Subjects);
+        if (ValueIsString(Replacement) && Replacement.startsWith('<')) {
+            this.Subjects.forEach(function (Subject, Index) {
+                Subject.replaceWith.apply(Subject, Replacements.Subjects);
+                if (Index < _this.Subjects.length - 1) {
+                    Replacements = new _DOMMaLi(Replacement);
+                }
+            });
+        }
+        else {
+            this.Subjects[0].replaceWith.apply(this.Subjects[0], Replacements.Subjects);
+        }
     };
     /**** remove ****/
     DOMMaLi.prototype.remove = function () {
