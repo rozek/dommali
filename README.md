@@ -26,7 +26,7 @@ Here are the methods `dommali` provides in alphabetical order:
 
 <table><tbody>
   <tr>
-    <td>`dommali`<br>&nbsp;<br>`DomMaLi.ready`<br>&nbsp;<br></td>
+    <td><code>dommali</code><br>&nbsp;<br><code>DomMaLi.ready</code><br>&nbsp;<br></td>
     <td></td>
     <td></td>
   </tr>
