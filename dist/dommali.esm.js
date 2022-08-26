@@ -509,18 +509,27 @@ var DOMMaLi = /** @class */ (function () {
     };
     /**** _insert ****/
     DOMMaLi.prototype._insert = function (Content, Method) {
+        var _this = this;
         if (this.Subjects.length === 0) {
             return this;
         }
-        if (!(Content instanceof DOMMaLi)) {
-            Content = new _DOMMaLi(Content);
-        }
-        if (Content.Subjects.length === 0) {
+        var Contents = (Content instanceof DOMMaLi
+            ? Content
+            : new _DOMMaLi(Content));
+        if (Contents.Subjects.length === 0) {
             return this;
         }
-        this.Subjects.forEach(function (Subject) {
-            Subject[Method].apply(Subject, Content.Subjects);
-        });
+        if (ValueIsString(Content) && Content.startsWith('<')) {
+            this.Subjects.forEach(function (Subject, Index) {
+                Subject[Method].apply(Subject, Contents.Subjects);
+                if (Index < _this.Subjects.length - 1) {
+                    Contents = new _DOMMaLi(Content);
+                }
+            });
+        }
+        else {
+            this.Subjects[0][Method].apply(this.Subjects[0], Contents.Subjects);
+        }
         return this;
     };
     /**** replaceWith ****/
@@ -954,6 +963,10 @@ var DOMMaLi = /** @class */ (function () {
     /**** hasFocus ****/
     DOMMaLi.prototype.hasFocus = function () {
         return (document.activeElement === this.Subjects[0]);
+    };
+    /**** focusedElement ****/
+    DOMMaLi.prototype.focusedElement = function () {
+        return new _DOMMaLi(document.activeElement);
     };
     /**** transition ****/
     DOMMaLi.prototype.transition = function (Settings, Options) {

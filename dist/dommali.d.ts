@@ -164,6 +164,8 @@ declare abstract class DOMMaLi {
     blur(this: DOMMaLi): DOMMaLi;
     /**** hasFocus ****/
     hasFocus(this: DOMMaLi): boolean;
+    /**** focusedElement ****/
+    focusedElement(this: DOMMaLi): DOMMaLi;
     /**** transition ****/
     transition(this: DOMMaLi, Settings: PlainObject, Options?: PlainObject): DOMMaLi;
 }
