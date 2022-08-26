@@ -10,7 +10,7 @@ The use of jQuery makes DOM manipulation code compact and legible - but it is a 
 
 The most notable differences between `dommali` and jQuery are:
 
-* tbd
+* iterator callback functions do not bind `this` to the DOM element just processed, instead the get a corresponding `dommali` object as their first argument - as a consequence, "fat arrow" functions may more easily serve as callbacks
 
 **NPM users**: please consider the [Github README](https://github.com/rozek/dommali/blob/main/README.md) for the latest description of this package (as updating the docs would otherwise always require a new NPM package version)
 
