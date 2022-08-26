@@ -176,10 +176,10 @@ The signatures shown below are those used by TypeScript
 
 ### CSS Class Management ###
 
-* **`hasClass (Classes:string):boolean`**<br>
-* **`addClass (Classes:string):DOMMaLi`**<br>
-* **`toggleClass (Classes:string):DOMMaLi`**<br>
-* **`removeClass (Classes:string):DOMMaLi`**<br>
+* **`hasClass (Classes:string):boolean`**<br>returns `true` if the first DOM element represented by this `dommali` object is associated with all (space-separated) CSS classes given by `Classes` - or `false` otherwise
+* **`addClass (Classes:string):DOMMaLi`**<br>associates all DOM elements represented by this `dommali` object with the (space-separated) CSS classes given by `Classes`
+* **`toggleClass (Classes:string):DOMMaLi`**<br>toggles the association of all DOM elements represented by this `dommali` object with the (space-separated) CSS classes given by `Classes`
+* **`removeClass (Classes:string):DOMMaLi`**<br>removes the association of all DOM elements represented by this `dommali` object with the (space-separated) CSS classes given by `Classes`
 
 ### Insertion and Removal ###
 
