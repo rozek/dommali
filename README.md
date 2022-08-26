@@ -20,6 +20,18 @@ The most notable differences between `dommali` and jQuery (or a look-alike) are:
 
 > Just a small note: if you like this module and plan to use it, consider "starring" this repository (you will find the "Star" button on the top right of this page), so that I know which of my repositories to take most care of.
 
+## Overview ##
+
+Here are the methods `dommali` provides in alphabetical order:
+
+<table><tbody>
+  <tr>
+    <td>(constructor)<br>&nbsp;<br>DomMaLi.ready<br>&nbsp;<br></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody></table>
+
 ## Installation ##
 
 `dommali` may be used as an ECMAScript module (ESM), a CommonJS or AMD module or from a global variable.
