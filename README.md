@@ -134,12 +134,12 @@ The signatures shown below are those used by TypeScript
 
 * **`positionInViewport ():{ left:number,top:number }|undefined`**<br>returns the _rendering_ position of the first DOM element represented by _this_ `dommali` object relative to the current viewport (or `undefined` if _this_ `dommali` object is empty)
 * **`renderPositionInViewport ():{ left:number,top:number }|undefined`**<br>is just a synonym for `positionInViewport`, emphasizing the fact, that the _rendering_ position is returned (which depends of CSS transforms for that DOM element)
-* **`positionInParent ():{ left:number,top:number }|undefined`**<br>returns the _layout_ position of the first DOM element represented by _this_ `dommali` object relative to its "offset parent" (or `undefined` if either _this_ `dommali` object is empty or no offset parent could be found)
+* **`positionInParent ():{ left:number,top:number }|undefined`**<br>returns the _layout_ position of the first HTML element represented by _this_ `dommali` object relative to its "offset parent" (or `undefined` if either _this_ `dommali` object is empty, its first element is not an **HTML element** or no offset parent could be found)
 * **`layoutPositionInParent ():{ left:number,top:number }|undefined`**<br>is just a synonym for `positionInParent`, emphasizing the fact, that the _layout_ position is returned (which is independent of any DOM element CSS transforms)
-* **`positionOnPage ():{ left:number,top:number }|undefined`**<br>returns the _layout_ position of the first DOM element represented by _this_ `dommali` object relative to the document (or `undefined` if _this_ `dommali` object is empty)
+* **`positionOnPage ():{ left:number,top:number }|undefined`**<br>returns the _layout_ position of the first DOM element represented by _this_ `dommali` object relative to the document (or `undefined` if _this_ `dommali` object is empty or its first element is not an **HTML element**)
 * **`layoutPositionOnPage ():{ left:number,top:number }|undefined`**<br>is just a synonym for `positionOnPage`, emphasizing the fact, that the _layout_ position is returned (which is independent of any DOM element CSS transforms)
-* **`width (newValue?:number):number|DOMMaLi|undefined`**<br>if no `newValue` is given, this method returns the _layout_ width of the first DOM element represented by _this_ `dommali` object (or `undefined` if _this_ `dommali` object is empty). Otherwise, the _layout_ width of all DOM elements represented by _this_ `dommali` object is set to the `newValue` pixels
-* **`height (newValue?:number):number|DOMMaLi|undefined`**<br>if no `newValue` is given, this method returns the _layout_ height of the first DOM element represented by _this_ `dommali` object (or `undefined` if _this_ `dommali` object is empty). Otherwise, the _layout_ height of all DOM elements represented by _this_ `dommali` object is set to the `newValue` pixels
+* **`width (newValue?:number):number|DOMMaLi|undefined`**<br>if no `newValue` is given, this method returns the _layout_ width of the first DOM element represented by _this_ `dommali` object (or `undefined` if _this_ `dommali` object is empty or its first element is not an **HTML element**). Otherwise, the _layout_ width of all **HTML elements** represented by _this_ `dommali` object is set to the `newValue` pixels
+* **`height (newValue?:number):number|DOMMaLi|undefined`**<br>if no `newValue` is given, this method returns the _layout_ height of the first DOM element represented by _this_ `dommali` object (or `undefined` if _this_ `dommali` object is empty or its first element is not an **HTML element**). Otherwise, the _layout_ height of all **HTML elements** represented by _this_ `dommali` object is set to the `newValue` pixels
 * **`layoutWidth (newValue?:number):number|DOMMaLi|undefined`**<br>is just a synonym for `width`, emphasizing the fact, that the _layout_ width is returned or set (which is independent of any DOM element CSS transforms)
 * **`layoutHeight (newValue?:number):number|DOMMaLi|undefined`**<br>is just a synonym for `height`, emphasizing the fact, that the _layout_ height is returned or set (which is independent of any DOM element CSS transforms)
 * **`outerWidth (newValue?:number):number|DOMMaLi|undefined`**<br>is just a synonym for `width`, emphasizing the fact, that the returned width includes the element's padding and border
@@ -163,8 +163,8 @@ The signatures shown below are those used by TypeScript
 
 ### Visibility ###
 
-* **`show ():DOMMaLi`**<br>makes all DOM elements represented by _this_ `dommali` object visible by setting their CSS property `display` to a value different from `none` - if possible, `dommali` tries to restore any setting that was active before an element was hidden. Otherwise, it uses the default setting for the given element tag - or `block` if all fails
-* **`hide ():DOMMaLi`**<br>makes all DOM elements represented by _this_ `dommali` object invisible by setting their CSS property `display` to `none`
+* **`show ():DOMMaLi`**<br>makes all **HTML elements** represented by _this_ `dommali` object visible by setting their CSS property `display` to a value different from `none` - if possible, `dommali` tries to restore any setting that was active before an element was hidden. Otherwise, it uses the default setting for the given element tag - or `block` if all fails
+* **`hide ():DOMMaLi`**<br>makes all **HTML elements** represented by _this_ `dommali` object invisible by setting their CSS property `display` to `none`
 
 ### Scrolling ###
 
@@ -237,13 +237,14 @@ The signatures shown below are those used by TypeScript
 
 ### Focus Handling ###
 
-* **`focus ():DOMMaLi`**<br>
-* **`blur ():DOMMaLi`**<br>
+* **`focus ():DOMMaLi`**<br>**HTML elements**
+* **`blur ():DOMMaLi`**<br>**HTML elements**
 * **`hasFocus ():boolean`**<br>
+* **`focusedElement ():DOMMaLi`**<br>
 
 ### CSS Transitions ###
 
-* **`transition (Settings:PlainObject, Options?:PlainObject):DOMMaLi`**<br>
+* **`transition (Settings:PlainObject, Options?:PlainObject):DOMMaLi`**<br>**HTML elements**
 
 ## Build Instructions ##
 
