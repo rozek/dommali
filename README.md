@@ -192,9 +192,9 @@ The signatures shown below are those used by TypeScript
 
 ### Properties ###
 
-* **`prop (Property:string, newValue?:any):DOMMaLi|any|undefined`**<br>
-* **`hasProp (Property:string):boolean`**<br>
-* **`removeProp (Property:string):DOMMaLi`**<br>
+* **`prop (Property:string, newValue?:any):DOMMaLi|any|undefined`**<br>if no `newValue` is given, this method returns the value of property `Property` of the first DOM element represented by this `dommali` object (or `undefined` if this `dommali` object is empty). Otherwise, property `Property` of all DOM elements represented by this `dommali` object is set to `newValue`
+* **`hasProp (Property:string):boolean`**<br>returns `true` if property `Property` is found in the _first_ DOM element represented by this `dommali` object - or `false` otherwise
+* **`removeProp (Property:string):DOMMaLi`**<br>removes property `Property` from all DOM elements represented by this `dommali` object
 
 ### Data ###
 
