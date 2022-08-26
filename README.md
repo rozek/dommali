@@ -210,9 +210,9 @@ The signatures shown below are those used by TypeScript
 
 ### CSS ###
 
-* **`css (Property:string|string, newValue?:string):DOMMaLi|string|undefined`**<br>
-* **`css (PropertyList:string[]):PlainObject|undefined`**<br>
-* **`css (PropertySet:PlainObject):DOMMaLi`**<br>
+* **`css (Property:string|string, newValue?:string):DOMMaLi|string|undefined`**<br>if no `newValue` is given, this method returns the _computed_ value of CSS property `Property` of the first DOM element represented by this `dommali` object (or `undefined` if this `dommali` object is empty). Otherwise, the CSS property `Property` of all DOM elements represented by this `dommali` object is set to `newValue`
+* **`css (PropertyList:string[]):PlainObject|undefined`**<br>returns the _computed_ values of all CSS properties given by `PropertyList` of the first DOM element represented by this `dommali` object as a plain JavaScript object with the given property names as keys (or `undefined` if this `dommali` object is empty)
+* **`css (PropertySet:PlainObject):DOMMaLi`**<br>sets the CSS properties given by the keys of `PropertySet` of all DOM elements represented by this `dommali` object to the values specified in `PropertySet`
 
 ### Contents ###
 
