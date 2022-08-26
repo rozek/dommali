@@ -84,7 +84,7 @@ $(document.body).html('<h1>Hello, World!</h1>')
 
 ## API Reference ##
 
-Similar to jQuery, `dommali` objects (i.e., instances of type `DOMMaLi`) represent collections of zero, one or multiple DOM elements. These elements may not be in document order unless they have been found by a CSS query or retrieved as the children of another element. While `dommali` objects may represent DOM elements of any type, several methods only work on items of type `HTMLElement` - other elements will be ignored.
+Similar to jQuery, `dommali` objects (i.e., instances of type `DOMMaLi`) represent collections of zero, one or multiple DOM elements. Internally, these elements may not be listed in document order unless they have been found by a CSS query or retrieved as the children of another element. While `dommali` objects may represent DOM elements of any type, several methods only work on items of type `HTMLElement` - other elements will be ignored.
 
 The signatures shown below are those used by TypeScript
 
