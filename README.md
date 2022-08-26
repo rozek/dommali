@@ -204,9 +204,9 @@ The signatures shown below are those used by TypeScript
 
 ### Attributes ###
 
-* **`attr (Attribute:string, newValue?:any):DOMMaLi|string|undefined`**<br>
-* **`hasAttr (Attribute:string):boolean`**<br>
-* **`removeAttr (Attribute:string):DOMMaLi`**<br>
+* **`attr (Attribute:string, newValue?:any):DOMMaLi|string|undefined`**<br>if no `newValue` is given, this method returns the value of HTML attribute `Attribute` of the first DOM element represented by this `dommali` object (or `undefined` if this `dommali` object is empty). Otherwise, the HTML attribute `Attribute` of all DOM elements represented by this `dommali` object is set to `newValue`
+* **`hasAttr (Attribute:string):boolean`**<br>returns `true` if HTML attribute `Attribute` is found in the _first_ DOM element represented by this `dommali` object - or `false` otherwise
+* **`removeAttr (Attribute:string):DOMMaLi`**<br>removes HTML attribute `Attribute` from all DOM elements represented by this `dommali` object
 
 ### CSS ###
 
