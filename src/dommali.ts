@@ -671,14 +671,23 @@
         return this
       }
 
-      if (! (Content instanceof DOMMaLi)) {
-        Content = new _DOMMaLi(Content)
-      }
-      if (Content.Subjects.length === 0) { return this }
+      let Contents:DOMMaLi = (
+        Content instanceof DOMMaLi
+        ? Content as DOMMaLi
+        : new _DOMMaLi(Content)
+      )
+      if (Contents.Subjects.length === 0) { return this }
 
-      this.Subjects.forEach((Subject:Element) => {
-        Subject[Method].apply(Subject,(Content as DOMMaLi).Subjects)
-      })
+      if (ValueIsString(Content) && (Content as string).startsWith('<')) {
+        this.Subjects.forEach((Subject:Element, Index:number) => {
+          Subject[Method].apply(Subject,Contents.Subjects)
+          if (Index < this.Subjects.length-1) {
+            Contents = new _DOMMaLi(Content as string)
+          }
+        })
+      } else {
+        this.Subjects[0][Method].apply(this.Subjects[0],Contents.Subjects)
+      }
 
       return this
     }
@@ -1233,6 +1242,12 @@
 
     hasFocus (this:DOMMaLi):boolean {
       return (document.activeElement === this.Subjects[0])
+    }
+
+  /**** focusedElement ****/
+
+    focusedElement (this:DOMMaLi):DOMMaLi{
+      return new _DOMMaLi(document.activeElement)
     }
 
   /**** transition ****/
