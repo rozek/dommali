@@ -216,10 +216,10 @@ The signatures shown below are those used by TypeScript
 
 ### Contents ###
 
-* **`html (newValue?:string):DOMMaLi|string|undefined`**<br>
-* **`text (newValue?:string):DOMMaLi|string|undefined`**<br>
-* **`appendText (Value:string):DOMMaLi`**<br>
-* **`prependText (Value:string):DOMMaLi`**<br>
+* **`html (newValue?:string):DOMMaLi|string|undefined`**<br>if no `newValue` is given, this method returns the _inner HTML_ of the first DOM element represented by this `dommali` object (or `undefined` if this `dommali` object is empty). Otherwise, the _inner HTML_ of all DOM elements represented by this `dommali` object is set to `newValue`
+* **`text (newValue?:string):DOMMaLi|string|undefined`**<br>if no `newValue` is given, this method returns the _inner text_ of the first DOM element represented by this `dommali` object (or `undefined` if this `dommali` object is empty). Otherwise, the _inner text_ of all DOM elements represented by this `dommali` object is set to `newValue`
+* **`appendText (Value:string):DOMMaLi`**<br>inserts the text given by `Value` after the _inner text_ of all DOM elements represented by this `dommali` object
+* **`prependText (Value:string):DOMMaLi`**<br>inserts the text given by `Value` before the _inner text_ of all DOM elements represented by this `dommali` object
 
 ### Event Handling ###
 
