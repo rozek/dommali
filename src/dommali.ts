@@ -699,13 +699,23 @@
     ):void {
       if (this.Subjects.length === 0) { return }
 
-      if (! (Replacement instanceof DOMMaLi)) {
-        Replacement = new _DOMMaLi(Replacement)
-      }
-      if (Replacement.Subjects.length === 0) { this.remove(); return }
+      let Replacements:DOMMaLi = (
+        Replacement instanceof DOMMaLi
+        ? Replacement as DOMMaLi
+        : new _DOMMaLi(Replacement)
+      )
+      if (Replacements.Subjects.length === 0) { this.remove(); return }
 
-      let Subject = this.Subjects[0]
-      Subject.replaceWith.apply(Subject,(Replacement as DOMMaLi).Subjects)
+      if (ValueIsString(Replacement) && (Replacement as string).startsWith('<')) {
+        this.Subjects.forEach((Subject:Element, Index:number) => {
+          Subject.replaceWith.apply(Subject,Replacements.Subjects)
+          if (Index < this.Subjects.length-1) {
+            Replacements = new _DOMMaLi(Replacement as string)
+          }
+        })
+      } else {
+        this.Subjects[0].replaceWith.apply(this.Subjects[0],Replacements.Subjects)
+      }
     }
 
   /**** remove ****/
