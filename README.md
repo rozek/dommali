@@ -183,10 +183,10 @@ The signatures shown below are those used by TypeScript
 
 ### Insertion and Removal ###
 
-* **`append (Content:string|String|DOMMaLi|Element|Element[]):DOMMaLi`**<br>
-* **`prepend (Content:string|String|DOMMaLi|Element|Element[]):DOMMaLi`**<br>
-* **`insertAfter (Content:DOMMaLi):DOMMaLi`**<br>
-* **`insertBefore (Content:DOMMaLi):DOMMaLi`**<br>
+* **`append (Content:string|String|DOMMaLi|Element|Element[]):DOMMaLi`**<br>if `Content` contains HTML code, this method inserts the DOM elements given by `Content` at the end of all DOM elements represented by this `dommali` object - otherwise the DOM elements given by `Content` are inserted at the end of the _first_ DOM element represented by this `dommali` object only. `Content` may contain HTML code, CSS selectors, one or multiple DOM elements or another `dommali` object
+* **`prepend (Content:string|String|DOMMaLi|Element|Element[]):DOMMaLi`**<br>if `Content` contains HTML code, this method inserts the DOM elements given by `Content` at the beginning of all DOM elements represented by this `dommali` object - otherwise the DOM elements given by `Content` are inserted at the beginning of the _first_ DOM element represented by this `dommali` object only. `Content` may contain HTML code, CSS selectors, one or multiple DOM elements or another `dommali` object
+* **`insertAfter (Content:DOMMaLi):DOMMaLi`**<br>inserts all DOM elements represented by this `dommali` object after the first DOM element represented by the given `Content`. `Content` may contain HTML code, CSS selectors, one or multiple DOM elements or another `dommali` object
+* **`insertBefore (Content:DOMMaLi):DOMMaLi`**<br>inserts all DOM elements represented by this `dommali` object before the first DOM element represented by the given `Content`. `Content` may contain HTML code, CSS selectors, one or multiple DOM elements or another `dommali` object
 * **`replaceWith (Replacement:string|String|DOMMaLi|Element|Element[]):void`**<br>
 * **`remove ():DOMMaLi`**<br>
 
