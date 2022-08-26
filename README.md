@@ -198,9 +198,9 @@ The signatures shown below are those used by TypeScript
 
 ### Data ###
 
-* **`data (Key:string, newValue?:any):DOMMaLi|any|undefined`**<br>
-* **`hasData (Key:string):boolean`**<br>
-* **`removeData (Key:string):DOMMaLi`**<br>
+* **`data (Key:string, newValue?:any):DOMMaLi|any|undefined`**<br>if no `newValue` is given, this method returns the value of data entry `Key` of the first DOM element represented by this `dommali` object (or `undefined` if this `dommali` object is empty). Otherwise, data entry `Key` of all DOM elements represented by this `dommali` object is set to `newValue`. **Data entries are custom values of any JavaScript type stored in DOM elements without polluting their namespace or overwriting DOM element properties or methods**
+* **`hasData (Key:string):boolean`**<br>returns `true` if data entry `Key` is found in the _first_ DOM element represented by this `dommali` object - or `false` otherwise
+* **`removeData (Key:string):DOMMaLi`**<br>removes data entry `Key` from all DOM elements represented by this `dommali` object
 
 ### Attributes ###
 
