@@ -155,6 +155,12 @@ var DOMMaLi = /** @class */ (function () {
             }));
         }
     };
+    /**** tagName ****/
+    DOMMaLi.prototype.tagName = function () {
+        return (this.Subjects.length === 0
+            ? undefined
+            : this.Subjects[0].tagName.toLowerCase());
+    };
     /**** matches ****/
     DOMMaLi.prototype.matches = function (Selector) {
         return this.Subjects.every(function (Subject) { return Subject.matches(Selector); });

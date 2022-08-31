@@ -28,6 +28,8 @@ declare abstract class DOMMaLi {
     forEach(this: DOMMaLi, Callback: Function): DOMMaLi;
     /**** filter ****/
     filter(this: DOMMaLi, SelectorOrCallback: string | String | Function): DOMMaLi;
+    /**** tagName ****/
+    tagName(this: DOMMaLi): string | undefined;
     /**** matches ****/
     matches(this: DOMMaLi, Selector: string | String): boolean;
     /**** find ****/
