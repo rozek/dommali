@@ -191,6 +191,16 @@
       }
     }
 
+  /**** tagName ****/
+
+    tagName (this:DOMMaLi):string|undefined {
+      return (
+        this.Subjects.length === 0
+        ? undefined
+        : this.Subjects[0].tagName.toLowerCase()
+      )
+    }
+
   /**** matches ****/
 
     matches (this:DOMMaLi, Selector:string|String):boolean {
