@@ -864,6 +864,29 @@
       return this
     }
 
+  /**** val ****/
+
+    val (
+      this:DOMMaLi, newValue?:any|null
+    ):DOMMaLi|string|undefined {
+      if (newValue === undefined) {
+        if (this.Subjects.length === 0) { return undefined }
+
+        let Value = this.Subjects[0].getAttribute('value')
+        return (Value === null ? undefined : Value)
+      } else {
+        if (newValue === null) {
+          return this.removeAttr('value')
+        }
+
+        newValue = '' + newValue
+        this.Subjects.forEach((Subject:Element) => {
+          Subject.setAttribute('value',newValue)
+        })
+        return this
+      }
+    }
+
   /**** css ****/
 
     css (
