@@ -132,6 +132,8 @@ declare abstract class DOMMaLi {
     hasAttr(this: DOMMaLi, Attribute: string): boolean;
     /**** removeAttr ****/
     removeAttr(this: DOMMaLi, Attribute: string): DOMMaLi;
+    /**** val ****/
+    val(this: DOMMaLi, newValue?: any | null): DOMMaLi | string | undefined;
     /**** css ****/
     css(this: DOMMaLi, PropertyOrListOrSet: string | string[] | PlainObject, newValue?: string): DOMMaLi | string | PlainObject | undefined;
     /**** html ****/

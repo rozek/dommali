@@ -664,6 +664,26 @@ var DOMMaLi = /** @class */ (function () {
         });
         return this;
     };
+    /**** val ****/
+    DOMMaLi.prototype.val = function (newValue) {
+        if (newValue === undefined) {
+            if (this.Subjects.length === 0) {
+                return undefined;
+            }
+            var Value = this.Subjects[0].getAttribute('value');
+            return (Value === null ? undefined : Value);
+        }
+        else {
+            if (newValue === null) {
+                return this.removeAttr('value');
+            }
+            newValue = '' + newValue;
+            this.Subjects.forEach(function (Subject) {
+                Subject.setAttribute('value', newValue);
+            });
+            return this;
+        }
+    };
     /**** css ****/
     DOMMaLi.prototype.css = function (PropertyOrListOrSet, newValue) {
         if (newValue === undefined) {
