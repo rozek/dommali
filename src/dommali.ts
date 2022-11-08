@@ -872,15 +872,12 @@
       if (newValue === undefined) {
         if (this.Subjects.length === 0) { return undefined }
 
+// @ts-ignore assume presence of "value" property
         let Value = this.Subjects[0].value
         return (Value === null ? undefined : Value)
       } else {
-        if (newValue === null) {
-          return this.removeAttr('value')
-        }
-
-        newValue = '' + newValue
         this.Subjects.forEach((Subject:Element) => {
+// @ts-ignore assume presence of "value" property
           Subject.value = newValue
         })
         return this
