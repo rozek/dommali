@@ -670,16 +670,14 @@ var DOMMaLi = /** @class */ (function () {
             if (this.Subjects.length === 0) {
                 return undefined;
             }
-            var Value = this.Subjects[0].getAttribute('value');
+            // @ts-ignore assume presence of "value" property
+            var Value = this.Subjects[0].value;
             return (Value === null ? undefined : Value);
         }
         else {
-            if (newValue === null) {
-                return this.removeAttr('value');
-            }
-            newValue = '' + newValue;
             this.Subjects.forEach(function (Subject) {
-                Subject.setAttribute('value', newValue);
+                // @ts-ignore assume presence of "value" property
+                Subject.value = newValue;
             });
             return this;
         }
