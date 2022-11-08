@@ -872,7 +872,7 @@
       if (newValue === undefined) {
         if (this.Subjects.length === 0) { return undefined }
 
-        let Value = this.Subjects[0].getAttribute('value')
+        let Value = this.Subjects[0].value
         return (Value === null ? undefined : Value)
       } else {
         if (newValue === null) {
@@ -881,7 +881,7 @@
 
         newValue = '' + newValue
         this.Subjects.forEach((Subject:Element) => {
-          Subject.setAttribute('value',newValue)
+          Subject.value = newValue
         })
         return this
       }
