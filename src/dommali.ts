@@ -209,6 +209,31 @@
       )
     }
 
+  /**** is ****/
+
+    is (this:DOMMaLi, Value:string|String|_DOMMaLi|Element):boolean {
+      switch (true) {
+        case ValueIsString(Value):
+          return this.matches(Value as string)
+        case (Value instanceof _DOMMaLi):
+          let Candidate = Value as _DOMMaLi
+          return (
+            (this.Subjects.length === Candidate.Subjects.length) &&
+            this.Subjects.every(
+              (Element,Index) => (Candidate.Subjects[Index] === Element)
+            )
+          )
+          break
+        case (Value instanceof Element):
+          return (
+            (this.Subjects.length === 1) &&
+            (this.Subjects[0]     === Value)
+          )
+        default:
+          return false
+      }
+    }
+
   /**** find ****/
 
     find (this:DOMMaLi, Selector:string|String):DOMMaLi {
