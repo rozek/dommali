@@ -165,6 +165,22 @@ var DOMMaLi = /** @class */ (function () {
     DOMMaLi.prototype.matches = function (Selector) {
         return this.Subjects.every(function (Subject) { return Subject.matches(Selector); });
     };
+    /**** is ****/
+    DOMMaLi.prototype.is = function (Value) {
+        switch (true) {
+            case ValueIsString(Value):
+                return this.matches(Value);
+            case (Value instanceof _DOMMaLi):
+                var Candidate_1 = Value;
+                return ((this.Subjects.length === Candidate_1.Subjects.length) &&
+                    this.Subjects.every(function (Element, Index) { return (Candidate_1.Subjects[Index] === Element); }));
+            case (Value instanceof Element):
+                return ((this.Subjects.length === 1) &&
+                    (this.Subjects[0] === Value));
+            default:
+                return false;
+        }
+    };
     /**** find ****/
     DOMMaLi.prototype.find = function (Selector) {
         return new _DOMMaLi(this.Subjects.length === 0

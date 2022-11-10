@@ -32,6 +32,8 @@ declare abstract class DOMMaLi {
     tagName(this: DOMMaLi): string | undefined;
     /**** matches ****/
     matches(this: DOMMaLi, Selector: string | String): boolean;
+    /**** is ****/
+    is(this: DOMMaLi, Value: string | String | _DOMMaLi | Element): boolean;
     /**** find ****/
     find(this: DOMMaLi, Selector: string | String): DOMMaLi;
     /**** findFirst ****/
@@ -172,6 +174,9 @@ declare abstract class DOMMaLi {
     focusedElement(this: DOMMaLi): DOMMaLi;
     /**** transition ****/
     transition(this: DOMMaLi, Settings: PlainObject, Options?: PlainObject): DOMMaLi;
+}
+declare class _DOMMaLi extends DOMMaLi {
+    constructor(Value?: string | String | DOMMaLi | Element | Element[] | null | undefined);
 }
 export default function dommali(Value: Function | string | String | DOMMaLi | Element | Element[]): DOMMaLi | typeof DOMMaLi;
 export {};
