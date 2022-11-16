@@ -430,14 +430,11 @@
         return undefined
       }
 
-      let Element = this.Subjects[0], left = 0, top = 0
-        while (Element instanceof HTMLElement) {
-          left += Element.offsetLeft
-          top  += Element.offsetTop
-
-          Element = Element.offsetParent as Element
-        }
-      return { left,top }
+      let Bounds = this.Subjects[0].getBoundingClientRect()
+      return {
+        left:Bounds.left + document.body.scrollLeft,
+        top: Bounds.top  + document.body.scrollTop
+      }
     }
 
 // see https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
