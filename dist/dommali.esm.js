@@ -321,13 +321,11 @@ var DOMMaLi = /** @class */ (function () {
         if (this.Subjects.length === 0) {
             return undefined;
         }
-        var Element = this.Subjects[0], left = 0, top = 0;
-        while (Element instanceof HTMLElement) {
-            left += Element.offsetLeft;
-            top += Element.offsetTop;
-            Element = Element.offsetParent;
-        }
-        return { left: left, top: top };
+        var Bounds = this.Subjects[0].getBoundingClientRect();
+        return {
+            left: Bounds.left + document.body.scrollLeft,
+            top: Bounds.top + document.body.scrollTop
+        };
     };
     // see https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
     // and https://jsbin.com/kimaxojufe/1/edit?css,js,console,output
