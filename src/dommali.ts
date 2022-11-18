@@ -912,11 +912,12 @@
       this:DOMMaLi, PropertyOrListOrSet:string|string[]|PlainObject, newValue?:string
     ):DOMMaLi|string|PlainObject|undefined {
       if (newValue === undefined) {
+        let computedStyles:any
         switch (true) {
           case (typeof PropertyOrListOrSet === 'string'):
             if (this.Subjects.length === 0) { return undefined }
 
-            let computedStyles = window.getComputedStyle(this.Subjects[0]) as Indexable
+            computedStyles = window.getComputedStyle(this.Subjects[0]) as Indexable
             return computedStyles[CamelCased(PropertyOrListOrSet as string)]
           case ValueIsArray(PropertyOrListOrSet):
             if (this.Subjects.length === 0) { return undefined }
