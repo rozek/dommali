@@ -699,12 +699,13 @@ var DOMMaLi = /** @class */ (function () {
     /**** css ****/
     DOMMaLi.prototype.css = function (PropertyOrListOrSet, newValue) {
         if (newValue === undefined) {
+            var computedStyles_1;
             switch (true) {
                 case (typeof PropertyOrListOrSet === 'string'):
                     if (this.Subjects.length === 0) {
                         return undefined;
                     }
-                    var computedStyles_1 = window.getComputedStyle(this.Subjects[0]);
+                    computedStyles_1 = window.getComputedStyle(this.Subjects[0]);
                     return computedStyles_1[CamelCased(PropertyOrListOrSet)];
                 case ValueIsArray(PropertyOrListOrSet):
                     if (this.Subjects.length === 0) {
