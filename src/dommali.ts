@@ -1260,12 +1260,12 @@
   /**** trigger ****/
 
     trigger (
-      this:DOMMaLi, Event:string|Event, extraParameters?:any
+      this:DOMMaLi, Event:string|Event, extraParameters?:any, bubbles = true
     ):boolean {
       if (this.Subjects.length === 0) { return true }
 
       if (ValueIsString(Event)) {
-        Event = new CustomEvent(Event as string, { bubbles:true, cancelable:true })
+        Event = new CustomEvent(Event as string, { bubbles, cancelable:true })
       }
 
       if (extraParameters != null) {
