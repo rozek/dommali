@@ -979,12 +979,13 @@ var DOMMaLi = /** @class */ (function () {
         }
     };
     /**** trigger ****/
-    DOMMaLi.prototype.trigger = function (Event, extraParameters) {
+    DOMMaLi.prototype.trigger = function (Event, extraParameters, bubbles) {
+        if (bubbles === void 0) { bubbles = true; }
         if (this.Subjects.length === 0) {
             return true;
         }
         if (ValueIsString(Event)) {
-            Event = new CustomEvent(Event, { bubbles: true, cancelable: true });
+            Event = new CustomEvent(Event, { bubbles: bubbles, cancelable: true });
         }
         if (extraParameters != null) {
             Event['_extraParameters'] = (ValueIsArray(extraParameters)

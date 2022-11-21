@@ -163,7 +163,7 @@ declare abstract class DOMMaLi {
     /**** _unregisterHandlersForEventSelectorsMatching ****/
     private _unregisterHandlersForEventSelectorsMatching;
     /**** trigger ****/
-    trigger(this: DOMMaLi, Event: string | Event, extraParameters?: any): boolean;
+    trigger(this: DOMMaLi, Event: string | Event, extraParameters?: any, bubbles?: boolean): boolean;
     /**** focus ****/
     focus(this: DOMMaLi): DOMMaLi;
     /**** blur ****/
