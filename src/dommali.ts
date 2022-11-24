@@ -1444,7 +1444,7 @@
               Template.innerHTML = Value as string
             this.Subjects = asArray(Template.content.children)
           } else {
-            this.Subjects = asArray(document.querySelectorAll(Value as string))
+            this.Subjects = asArray(document.querySelectorAll(unhashed(Value as string)))
           }
           break
         case (Value instanceof _DOMMaLi):
