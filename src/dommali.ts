@@ -194,7 +194,7 @@
       } else {
         return new _DOMMaLi(
           this.Subjects.filter((Subject:Element) => {
-            return Subject.matches(SelectorOrCallback as string)
+            return Subject.matches(unhashed(SelectorOrCallback as string))
           })
         )
       }
@@ -214,7 +214,7 @@
 
     matches (this:DOMMaLi, Selector:string|String):boolean {
       return this.Subjects.every(
-        (Subject:Element) => Subject.matches(Selector as string)
+        (Subject:Element) => Subject.matches(unhashed(Selector as string))
       )
     }
 
@@ -223,7 +223,7 @@
     is (this:DOMMaLi, Value:string|String|_DOMMaLi|Element):boolean {
       switch (true) {
         case ValueIsString(Value):
-          return this.matches(Value as string)
+          return this.matches(unhashed(Value as string))
         case (Value instanceof _DOMMaLi):
           let Candidate = Value as _DOMMaLi
           return (
@@ -249,7 +249,7 @@
       return new _DOMMaLi(
         this.Subjects.length === 0
         ? undefined
-        : asArray(this.Subjects[0].querySelectorAll(Selector as string))
+        : asArray(this.Subjects[0].querySelectorAll(unhashed(Selector as string)))
       )
     }
 
@@ -259,7 +259,7 @@
       return new _DOMMaLi(
         (this.Subjects.length === 0)
         ? undefined
-        : this.Subjects[0].querySelector(Selector as string) as Element
+        : this.Subjects[0].querySelector(unhashed(Selector as string)) as Element
       )
     }
 
@@ -279,7 +279,7 @@
       return new _DOMMaLi(
         this.Subjects.length === 0
         ? undefined
-        : this.Subjects[0].closest(Selector as string)
+        : this.Subjects[0].closest(unhashed(Selector as string))
       )
     }
 
@@ -314,7 +314,7 @@
 
       if (Selector != null) {
         ChildElements = ChildElements.filter(
-          (Subject:Element) => Subject.matches(Selector as string)
+          (Subject:Element) => Subject.matches(unhashed(Selector as string))
         )
       }
 
@@ -333,7 +333,7 @@
       } else {
         return new _DOMMaLi(
           asArray(this.Subjects[0].children).find(
-            (Subject:Element) => Subject.matches(Selector as string)
+            (Subject:Element) => Subject.matches(unhashed(Selector as string))
           )
         )
       }
@@ -352,7 +352,7 @@
         let ChildElements = asArray(this.Subjects[0].children)
 
         for (let i = ChildElements.length-1; i >= 0; i--) {
-          if (ChildElements[i].matches(Selector as string)) {
+          if (ChildElements[i].matches(unhashed(Selector as string))) {
             return new _DOMMaLi(ChildElements[i])
           }
         }
@@ -372,7 +372,7 @@
       } else {
         let Sibling = this.Subjects[0].previousElementSibling
           while (Sibling != null) {
-            if (Sibling.matches(Selector as string)) {
+            if (Sibling.matches(unhashed(Selector as string))) {
               return new _DOMMaLi(Sibling)
             }
             Sibling = Sibling.previousElementSibling
@@ -393,7 +393,7 @@
       } else {
         let Sibling = this.Subjects[0].nextElementSibling
           while (Sibling != null) {
-            if (Sibling.matches(Selector as string)) {
+            if (Sibling.matches(unhashed(Selector as string))) {
               return new _DOMMaLi(Sibling)
             }
             Sibling = Sibling.nextElementSibling
