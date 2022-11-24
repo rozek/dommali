@@ -79,6 +79,15 @@
 
     return DisplayDefault
   }
+/**** unhashed - convert #<id> into [id="<id>"] ****/
+
+  function unhashed (Selector:string):string {
+    return (
+      Selector.startsWith('#')
+      ? '[id="' + Selector.slice(1) + '"]' // not perfect
+      : Selector
+    )
+  }
 
 
   abstract class DOMMaLi {
