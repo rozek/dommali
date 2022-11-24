@@ -1126,7 +1126,7 @@ var _DOMMaLi = /** @class */ (function (_super) {
                     _this.Subjects = asArray(Template.content.children);
                 }
                 else {
-                    _this.Subjects = asArray(document.querySelectorAll(Value));
+                    _this.Subjects = asArray(document.querySelectorAll(unhashed(Value)));
                 }
                 break;
             case (Value instanceof _DOMMaLi):
