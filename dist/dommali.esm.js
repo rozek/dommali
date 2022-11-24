@@ -69,6 +69,12 @@ function DisplayDefaultFor(TagName) {
     document.body.removeChild(auxElement);
     return DisplayDefault;
 }
+/**** unhashed - convert #<id> into [id="<id>"] ****/
+function unhashed(Selector) {
+    return (Selector.startsWith('#')
+        ? '[id="' + Selector.slice(1) + '"]' // not perfect
+        : Selector);
+}
 var DOMMaLi = /** @class */ (function () {
     function DOMMaLi() {
         this.Subjects = [];
@@ -151,7 +157,7 @@ var DOMMaLi = /** @class */ (function () {
         }
         else {
             return new _DOMMaLi(this.Subjects.filter(function (Subject) {
-                return Subject.matches(SelectorOrCallback);
+                return Subject.matches(unhashed(SelectorOrCallback));
             }));
         }
     };
@@ -163,13 +169,13 @@ var DOMMaLi = /** @class */ (function () {
     };
     /**** matches ****/
     DOMMaLi.prototype.matches = function (Selector) {
-        return this.Subjects.every(function (Subject) { return Subject.matches(Selector); });
+        return this.Subjects.every(function (Subject) { return Subject.matches(unhashed(Selector)); });
     };
     /**** is ****/
     DOMMaLi.prototype.is = function (Value) {
         switch (true) {
             case ValueIsString(Value):
-                return this.matches(Value);
+                return this.matches(unhashed(Value));
             case (Value instanceof _DOMMaLi):
                 var Candidate_1 = Value;
                 return ((this.Subjects.length === Candidate_1.Subjects.length) &&
@@ -185,13 +191,13 @@ var DOMMaLi = /** @class */ (function () {
     DOMMaLi.prototype.find = function (Selector) {
         return new _DOMMaLi(this.Subjects.length === 0
             ? undefined
-            : asArray(this.Subjects[0].querySelectorAll(Selector)));
+            : asArray(this.Subjects[0].querySelectorAll(unhashed(Selector))));
     };
     /**** findFirst ****/
     DOMMaLi.prototype.findFirst = function (Selector) {
         return new _DOMMaLi((this.Subjects.length === 0)
             ? undefined
-            : this.Subjects[0].querySelector(Selector));
+            : this.Subjects[0].querySelector(unhashed(Selector)));
     };
     /**** parent ****/
     DOMMaLi.prototype.parent = function () {
@@ -203,7 +209,7 @@ var DOMMaLi = /** @class */ (function () {
     DOMMaLi.prototype.closest = function (Selector) {
         return new _DOMMaLi(this.Subjects.length === 0
             ? undefined
-            : this.Subjects[0].closest(Selector));
+            : this.Subjects[0].closest(unhashed(Selector)));
     };
     /**** isAttached ****/
     DOMMaLi.prototype.isAttached = function () {
@@ -224,7 +230,7 @@ var DOMMaLi = /** @class */ (function () {
             ? []
             : asArray(this.Subjects[0].children));
         if (Selector != null) {
-            ChildElements = ChildElements.filter(function (Subject) { return Subject.matches(Selector); });
+            ChildElements = ChildElements.filter(function (Subject) { return Subject.matches(unhashed(Selector)); });
         }
         return new _DOMMaLi(ChildElements);
     };
@@ -237,7 +243,7 @@ var DOMMaLi = /** @class */ (function () {
             return new _DOMMaLi(this.Subjects[0].firstElementChild);
         }
         else {
-            return new _DOMMaLi(asArray(this.Subjects[0].children).find(function (Subject) { return Subject.matches(Selector); }));
+            return new _DOMMaLi(asArray(this.Subjects[0].children).find(function (Subject) { return Subject.matches(unhashed(Selector)); }));
         }
     };
     /**** lastChild ****/
@@ -251,7 +257,7 @@ var DOMMaLi = /** @class */ (function () {
         else {
             var ChildElements = asArray(this.Subjects[0].children);
             for (var i = ChildElements.length - 1; i >= 0; i--) {
-                if (ChildElements[i].matches(Selector)) {
+                if (ChildElements[i].matches(unhashed(Selector))) {
                     return new _DOMMaLi(ChildElements[i]);
                 }
             }
@@ -269,7 +275,7 @@ var DOMMaLi = /** @class */ (function () {
         else {
             var Sibling = this.Subjects[0].previousElementSibling;
             while (Sibling != null) {
-                if (Sibling.matches(Selector)) {
+                if (Sibling.matches(unhashed(Selector))) {
                     return new _DOMMaLi(Sibling);
                 }
                 Sibling = Sibling.previousElementSibling;
@@ -288,7 +294,7 @@ var DOMMaLi = /** @class */ (function () {
         else {
             var Sibling = this.Subjects[0].nextElementSibling;
             while (Sibling != null) {
-                if (Sibling.matches(Selector)) {
+                if (Sibling.matches(unhashed(Selector))) {
                     return new _DOMMaLi(Sibling);
                 }
                 Sibling = Sibling.nextElementSibling;
