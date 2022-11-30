@@ -106,6 +106,143 @@
       return this
     }
 
+  /**** textWidth ****/
+
+    private static readonly _relevantSettings_for_textWidth = [
+      'font-family', 'font-size', 'font-weight', 'font-style', 'font-variant',
+      'font-variant-caps', 'font-variant-numeric', 'font-variant-alternates',
+      'font-variant-ligatures', 'font-variant-east-asian', 'font-stretch',
+      'font-kerning', 'font-size-adjust', 'font-synthesis', 'font-language-override',
+      'white-space', 'letter-spacing', 'word-spacing', 'text-indent',
+      'text-transform'
+    ]
+
+    private static _auxiliarySpan:DOMMaLi
+
+    static textWidth (Text:string, TemplateOrSettings?:any):number {
+      if (DOMisReady) {
+        if (_DOMMaLi._auxiliarySpan == null) {
+          let auxiliarySpan = document.createElement('span')
+            auxiliarySpan.style.visibility = 'hidden'
+          document.body.appendChild(auxiliarySpan)
+
+          _DOMMaLi._auxiliarySpan = dommali(auxiliarySpan) as DOMMaLi
+        }
+
+        let auxiliarySpan = _DOMMaLi._auxiliarySpan
+
+        auxiliarySpan.css({   // reset settings that could influence measurement
+          width:'auto', 'min-width':0, 'max-width':'none',
+          margin:0, padding:0, border:'none', font:'normal',
+          'white-space':'normal', 'letter-spacing':'normal', 'word-spacing':'normal',
+          'text-indent':0, 'text-transform':'none'
+        })
+
+        if (TemplateOrSettings) {
+          let Settings:{[Key:string]:string}
+          switch (true) {
+            case (typeof TemplateOrSettings === 'object') && (
+              (Object.getPrototypeOf(TemplateOrSettings) === Object.prototype) ||
+              (Object.getPrototypeOf(TemplateOrSettings) ==  null)
+            ):
+              Settings = TemplateOrSettings
+              break
+            case TemplateOrSettings instanceof DOMMaLi:
+            case TemplateOrSettings instanceof Element:
+// @ts-ignore allow assignment to "Settings"
+              Settings = window.getComputedStyle(
+// @ts-ignore dommali(...) does return a DOMMaLi instance
+                dommali(TemplateOrSettings).subject(0)
+              )
+              break
+            default:
+              throw new TypeError('DOMMaLi instance, HTML element or settings expected')
+          }
+
+          _DOMMaLi._relevantSettings_for_textWidth.forEach((relevantSetting) => {
+            const ValueOfSetting = Settings[relevantSetting]
+            if (ValueOfSetting != null) {
+              auxiliarySpan.css(relevantSetting,ValueOfSetting)
+            }
+          })
+        }
+
+// @ts-ignore "auxiliarySpan" is defined and "text" returns it
+        return auxiliarySpan.text(Text).width()   // performs actual measurement
+      } else {
+        return NaN
+      }
+    }
+
+  /**** textHeight ****/
+
+    private static readonly _relevantSettings_for_textHeight = [
+      'font-family', 'font-size', 'font-weight', 'font-style', 'font-variant',
+      'font-variant-caps', 'font-variant-numeric', 'font-variant-alternates',
+      'font-variant-ligatures', 'font-variant-east-asian', 'font-stretch',
+      'font-kerning', 'font-size-adjust', 'font-synthesis', 'font-language-override',
+      'white-space', 'letter-spacing', 'word-spacing', 'text-indent',
+      'text-transform', 'word-break', 'line-break', 'line-height',
+      'width'                               // width may be explicitly specified
+    ]
+
+    private static _auxiliaryDiv:DOMMaLi
+
+    static textHeight (Text:string, TemplateOrSettings?:any):number {
+      if (DOMisReady) {
+        if (_DOMMaLi._auxiliaryDiv == null) {
+          let auxiliaryDiv = document.createElement('div')
+            auxiliaryDiv.style.visibility = 'hidden'
+          document.body.appendChild(auxiliaryDiv)
+
+          _DOMMaLi._auxiliaryDiv = dommali(auxiliaryDiv) as DOMMaLi
+        }
+
+        let auxiliaryDiv = _DOMMaLi._auxiliaryDiv
+
+        auxiliaryDiv.css({    // reset settings that could influence measurement
+          width:'auto', 'min-width':0, 'max-width':'none',
+          margin:0, padding:0, border:'none', font:'normal',
+          'white-space':'normal', 'letter-spacing':'normal', 'word-spacing':'normal',
+          'text-indent':0, 'text-transform':'none'
+        })
+
+        if (TemplateOrSettings) {
+          let Settings:{[Key:string]:string}
+          switch (true) {
+            case (typeof TemplateOrSettings === 'object') && (
+              (Object.getPrototypeOf(TemplateOrSettings) === Object.prototype) ||
+              (Object.getPrototypeOf(TemplateOrSettings) ==  null)
+            ):
+              Settings = TemplateOrSettings
+              break
+            case TemplateOrSettings instanceof DOMMaLi:
+            case TemplateOrSettings instanceof Element:
+// @ts-ignore allow assignment to "Settings"
+              Settings = window.getComputedStyle(
+// @ts-ignore dommali(...) does return a DOMMaLi instance
+                dommali(TemplateOrSettings).subject(0)
+              )
+              break
+            default:
+              throw new TypeError('DOMMaLi instance, HTML element or settings expected')
+          }
+
+          _DOMMaLi._relevantSettings_for_textHeight.forEach((relevantSetting) => {
+            const ValueOfSetting = Settings[relevantSetting]
+            if (ValueOfSetting != null) {
+              auxiliaryDiv.css(relevantSetting,ValueOfSetting)
+            }
+          })
+        }
+
+// @ts-ignore "auxiliaryDiv" is defined and "text" returns it
+        return auxiliaryDiv.text(Text).height()   // performs actual measurement
+      } else {
+        return NaN
+      }
+    }
+
 
   /**** get length ****/
 
