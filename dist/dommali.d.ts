@@ -4,6 +4,14 @@ declare abstract class DOMMaLi {
     protected Subjects: Element[];
     /**** ready - similar to jQuery.ready ****/
     static ready(this: typeof DOMMaLi, FunctionToCall: Function): typeof DOMMaLi;
+    /**** textWidth ****/
+    private static readonly _relevantSettings_for_textWidth;
+    private static _auxiliarySpan;
+    static textWidth(Text: string, TemplateOrSettings?: any): number;
+    /**** textHeight ****/
+    private static readonly _relevantSettings_for_textHeight;
+    private static _auxiliaryDiv;
+    static textHeight(Text: string, TemplateOrSettings?: any): number;
     /**** get length ****/
     get length(): number;
     /**** size ****/

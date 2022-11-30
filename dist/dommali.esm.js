@@ -89,6 +89,98 @@ var DOMMaLi = /** @class */ (function () {
         }
         return this;
     };
+    DOMMaLi.textWidth = function (Text, TemplateOrSettings) {
+        if (DOMisReady) {
+            if (_DOMMaLi._auxiliarySpan == null) {
+                var auxiliarySpan_1 = document.createElement('span');
+                auxiliarySpan_1.style.visibility = 'hidden';
+                document.body.appendChild(auxiliarySpan_1);
+                _DOMMaLi._auxiliarySpan = dommali(auxiliarySpan_1);
+            }
+            var auxiliarySpan_2 = _DOMMaLi._auxiliarySpan;
+            auxiliarySpan_2.css({
+                width: 'auto', 'min-width': 0, 'max-width': 'none',
+                margin: 0, padding: 0, border: 'none', font: 'normal',
+                'white-space': 'normal', 'letter-spacing': 'normal', 'word-spacing': 'normal',
+                'text-indent': 0, 'text-transform': 'none'
+            });
+            if (TemplateOrSettings) {
+                var Settings_1;
+                switch (true) {
+                    case (typeof TemplateOrSettings === 'object') && ((Object.getPrototypeOf(TemplateOrSettings) === Object.prototype) ||
+                        (Object.getPrototypeOf(TemplateOrSettings) == null)):
+                        Settings_1 = TemplateOrSettings;
+                        break;
+                    case TemplateOrSettings instanceof DOMMaLi:
+                    case TemplateOrSettings instanceof Element:
+                        // @ts-ignore allow assignment to "Settings"
+                        Settings_1 = window.getComputedStyle(
+                        // @ts-ignore dommali(...) does return a DOMMaLi instance
+                        dommali(TemplateOrSettings).subject(0));
+                        break;
+                    default:
+                        throw new TypeError('DOMMaLi instance, HTML element or settings expected');
+                }
+                _DOMMaLi._relevantSettings_for_textWidth.forEach(function (relevantSetting) {
+                    var ValueOfSetting = Settings_1[relevantSetting];
+                    if (ValueOfSetting != null) {
+                        auxiliarySpan_2.css(relevantSetting, ValueOfSetting);
+                    }
+                });
+            }
+            // @ts-ignore "auxiliarySpan" is defined and "text" returns it
+            return auxiliarySpan_2.text(Text).width(); // performs actual measurement
+        }
+        else {
+            return NaN;
+        }
+    };
+    DOMMaLi.textHeight = function (Text, TemplateOrSettings) {
+        if (DOMisReady) {
+            if (_DOMMaLi._auxiliaryDiv == null) {
+                var auxiliaryDiv_1 = document.createElement('div');
+                auxiliaryDiv_1.style.visibility = 'hidden';
+                document.body.appendChild(auxiliaryDiv_1);
+                _DOMMaLi._auxiliaryDiv = dommali(auxiliaryDiv_1);
+            }
+            var auxiliaryDiv_2 = _DOMMaLi._auxiliaryDiv;
+            auxiliaryDiv_2.css({
+                width: 'auto', 'min-width': 0, 'max-width': 'none',
+                margin: 0, padding: 0, border: 'none', font: 'normal',
+                'white-space': 'normal', 'letter-spacing': 'normal', 'word-spacing': 'normal',
+                'text-indent': 0, 'text-transform': 'none'
+            });
+            if (TemplateOrSettings) {
+                var Settings_2;
+                switch (true) {
+                    case (typeof TemplateOrSettings === 'object') && ((Object.getPrototypeOf(TemplateOrSettings) === Object.prototype) ||
+                        (Object.getPrototypeOf(TemplateOrSettings) == null)):
+                        Settings_2 = TemplateOrSettings;
+                        break;
+                    case TemplateOrSettings instanceof DOMMaLi:
+                    case TemplateOrSettings instanceof Element:
+                        // @ts-ignore allow assignment to "Settings"
+                        Settings_2 = window.getComputedStyle(
+                        // @ts-ignore dommali(...) does return a DOMMaLi instance
+                        dommali(TemplateOrSettings).subject(0));
+                        break;
+                    default:
+                        throw new TypeError('DOMMaLi instance, HTML element or settings expected');
+                }
+                _DOMMaLi._relevantSettings_for_textHeight.forEach(function (relevantSetting) {
+                    var ValueOfSetting = Settings_2[relevantSetting];
+                    if (ValueOfSetting != null) {
+                        auxiliaryDiv_2.css(relevantSetting, ValueOfSetting);
+                    }
+                });
+            }
+            // @ts-ignore "auxiliaryDiv" is defined and "text" returns it
+            return auxiliaryDiv_2.text(Text).height(); // performs actual measurement
+        }
+        else {
+            return NaN;
+        }
+    };
     Object.defineProperty(DOMMaLi.prototype, "length", {
         /**** get length ****/
         get: function () {
@@ -1072,6 +1164,25 @@ var DOMMaLi = /** @class */ (function () {
         });
         return this;
     };
+    /**** textWidth ****/
+    DOMMaLi._relevantSettings_for_textWidth = [
+        'font-family', 'font-size', 'font-weight', 'font-style', 'font-variant',
+        'font-variant-caps', 'font-variant-numeric', 'font-variant-alternates',
+        'font-variant-ligatures', 'font-variant-east-asian', 'font-stretch',
+        'font-kerning', 'font-size-adjust', 'font-synthesis', 'font-language-override',
+        'white-space', 'letter-spacing', 'word-spacing', 'text-indent',
+        'text-transform'
+    ];
+    /**** textHeight ****/
+    DOMMaLi._relevantSettings_for_textHeight = [
+        'font-family', 'font-size', 'font-weight', 'font-style', 'font-variant',
+        'font-variant-caps', 'font-variant-numeric', 'font-variant-alternates',
+        'font-variant-ligatures', 'font-variant-east-asian', 'font-stretch',
+        'font-kerning', 'font-size-adjust', 'font-synthesis', 'font-language-override',
+        'white-space', 'letter-spacing', 'word-spacing', 'text-indent',
+        'text-transform', 'word-break', 'line-break', 'line-height',
+        'width' // width may be explicitly specified
+    ];
     return DOMMaLi;
 }());
 /**** apply any synonyms ****/
