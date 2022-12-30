@@ -12,6 +12,8 @@ declare abstract class DOMMaLi {
     private static readonly _relevantSettings_for_textHeight;
     private static _auxiliaryDiv;
     static textHeight(Text: string, TemplateOrSettings?: any): number;
+    /**** extraParametersOfEvent ****/
+    static extraParametersOfEvent(Event: Event): any[];
     /**** get length ****/
     get length(): number;
     /**** size ****/
@@ -170,6 +172,12 @@ declare abstract class DOMMaLi {
     private _unregisterHandlersForEventMatching;
     /**** _unregisterHandlersForEventSelectorsMatching ****/
     private _unregisterHandlersForEventSelectorsMatching;
+    /**** waitFor ****/
+    waitFor(this: DOMMaLi, ...EventsOrTimeout: (string | number)[]): Promise<any>;
+    /**** repeatUntil ****/
+    repeatUntil(this: DOMMaLi, ...EventsOrTimeoutOrLoopBody: (string | number | Function)[]): Promise<any>;
+    /**** HandlersForEvent ****/
+    HandlersForEvent(this: DOMMaLi, Event: string): Function[];
     /**** trigger ****/
     trigger(this: DOMMaLi, Event: string | Event, extraParameters?: any, bubbles?: boolean): boolean;
     /**** focus ****/
