@@ -10,10 +10,32 @@
   type indexableHTMLElement = HTMLElement & Indexable
   type indexableEvent       = Event       & Indexable
 
+/**** ValueIsNumber ****/
+
+  function ValueIsNumber (Value:any):boolean {
+    return (typeof Value === 'number') || (Value instanceof Number)
+  }
+
 /**** ValueIsString ****/
 
   function ValueIsString (Value:any):boolean {
     return (typeof Value === 'string') || (Value instanceof String)
+  }
+
+/**** ValueIsFunction ****/
+
+  function ValueIsFunction (Value:any):boolean {
+    return (typeof Value === 'function')
+  }
+
+/**** ValueIsEventNameWithSelector ****/
+
+  const NameWithSelectorPattern = /^[a-z$_][a-z$_0-9]*([-.:][a-z$_0-9]*)*@.*$/i
+
+  function ValueIsEventNameWithSelector (Value:any):boolean {
+    return (
+      (typeof Value === 'string') || (Value instanceof String)
+    ) && NameWithSelectorPattern.test(Value as string)
   }
 
 /**** ValueIsArray ****/
@@ -241,6 +263,13 @@
       } else {
         return NaN
       }
+    }
+
+  /**** extraParametersOfEvent ****/
+
+    static extraParametersOfEvent (Event:Event):any[] {
+      let extraParameters = (Event as indexableEvent)['_extraParameters']
+      return (Array.isArray(extraParameters) ? extraParameters.slice() : [])
     }
 
 
@@ -1253,7 +1282,17 @@
       }
       (actualHandler as indexableFunction)['isFor'] = Handler
 
-      Events.split(' ').forEach((Event:string) => {
+      let EventList:string[]
+      if (ValueIsEventNameWithSelector(Events)) {
+        let AtIndex = Events.indexOf('@')
+        EventList = [Events.slice(0,AtIndex)]
+        Selector  = Events.slice(AtIndex+1)
+          if (Selector === 'this') { Selector = '@this' }        // special case
+      } else {
+        EventList = Events.split(' ')
+      }
+
+      EventList.forEach((Event:string) => {
         this.Subjects.forEach((Subject:indexableElement) => {
           let EventRegistry:Indexable = Subject['_EventRegistry']
           if (EventRegistry == null) {
@@ -1299,10 +1338,6 @@
         ? (ArgList.shift() as string).trim()
         : (ArgList[0] === null ? ArgList.shift() || '' : undefined)
       )            // "null" means: no selector, "undefined" means: any selector
-      if (Selector === undefined) {
-        this._unregisterAllEventHandlersMatching(Events)
-        return this
-      }
 
       Handler = ArgList.shift()
       if (Handler == null) {
@@ -1320,18 +1355,27 @@
     private _unregisterAllEventHandlersMatching (
       this:DOMMaLi, Events?:string, Selector?:string|String|null, Handler?:Function
     ):DOMMaLi {
+      let EventList:string[]
+      if (ValueIsEventNameWithSelector(Events)) {
+        let AtIndex = (Events as string).indexOf('@')
+        EventList = [(Events as string).slice(0,AtIndex)]
+        Selector  = (Events as string).slice(AtIndex+1)
+      } else {
+        EventList = (Events == null ? [] : Events.split(' '))
+      }
+
       this.Subjects.forEach((Subject:indexableElement) => {
         let EventRegistry:Indexable = Subject['_EventRegistry']
         if (EventRegistry == null) { return }
 
-        if (Events == null) {                   // unregister any event handlers
+        if (EventList.length === 0) {           // unregister any event handlers
           for (let Event in EventRegistry) {
             this._unregisterHandlersForEventMatching(
               Subject,EventRegistry, Event,Selector,Handler
             )
           }
         } else {                // unregister handlers for the given events only
-          Events.split(' ').forEach((Event:string) => {
+          EventList.forEach((Event:string) => {
             this._unregisterHandlersForEventMatching(
               Subject,EventRegistry, Event,Selector,Handler
             )
@@ -1401,6 +1445,149 @@
           delete EntriesForEvent[Selector as string]
         }
       }
+    }
+
+  /**** waitFor ****/
+
+    async waitFor (
+      this:DOMMaLi, ...EventsOrTimeout:(string|number)[]
+    ):Promise<any> {
+      let EventList:string[] = []
+      let Timeout:number     = -1
+
+      EventsOrTimeout.forEach((EventOrTimeout:string|number) => {
+        switch (true) {
+          case ValueIsString(EventOrTimeout):
+            EventList.push(EventOrTimeout as string)
+            break
+          case ValueIsNumber(EventOrTimeout):
+            Timeout = Math.max(0,Math.round(EventOrTimeout as number))
+            break
+          default: throw new TypeError(
+            'event name (with opt. selector) or timeout expected'
+          )
+        }
+      })
+
+      if (! isFinite(Timeout)) { Timeout = 0 }
+
+      return new Promise((resolve,reject) => {
+        let Target = this
+
+        let Timer:any
+        let StartTime:number
+
+        function cleanupFrom (Event:any) {
+          EventList.forEach((EventSpec) => Target.off(EventSpec,cleanupFrom))
+          if (Event == null) {                               // timeout occurred
+            resolve(Date.now()-StartTime)
+          } else {                              // event occurred before timeout
+            clearTimeout(Timer)
+            resolve(Event)
+          }
+        }
+
+        EventList.forEach((EventSpec) => Target.on(EventSpec,cleanupFrom))
+
+        if (Timeout > 0) {
+          StartTime = Date.now()
+          Timer = setTimeout(cleanupFrom,Timeout)
+        }
+      })
+    }
+
+  /**** repeatUntil ****/
+
+    async repeatUntil (
+      this:DOMMaLi, ...EventsOrTimeoutOrLoopBody:(string|number|Function)[]
+    ):Promise<any> {
+      let EventList:string[] = []
+      let Timeout:number     = -1
+      let LoopBody:Function
+
+      EventsOrTimeoutOrLoopBody.forEach((Argument:string|number|Function) => {
+        switch (true) {
+          case ValueIsString(Argument):
+            EventList.push(Argument as string)
+            break
+          case ValueIsNumber(Argument):
+            Timeout = Math.max(0,Math.round(Argument as number))
+            break
+          case ValueIsFunction(Argument):
+            LoopBody = Argument as Function
+            break
+          default: throw new TypeError(
+            'event name (with opt. selector) or timeout or loop body expected'
+          )
+        }
+      })
+
+// @ts-ignore: TypeScript bug? the thrown compiler error is rubbish
+      if (LoopBody == null) {
+        throw new TypeError('no loop body function given')
+      }
+
+      if (! isFinite(Timeout)) { Timeout = 0 }
+
+      return new Promise(async (resolve,reject) => {
+        let Target     = this
+        let Result:any = undefined
+
+        let Timer:any
+        let StartTime:number
+
+        function processEventOrTimeout (Event:any) {
+          EventList.forEach((EventSpec) => Target.off(EventSpec,processEventOrTimeout))
+          if (Event === undefined) {                         // timeout occurred
+            Result = Date.now()-StartTime
+          } else {                              // event occurred before timeout
+            clearTimeout(Timer)
+            Result = Event
+          }
+        }
+
+        EventList.forEach((EventSpec) => Target.on(EventSpec,processEventOrTimeout))
+
+        if (Timeout > 0) {
+          StartTime = Date.now()
+          Timer = setTimeout(processEventOrTimeout,Timeout)
+        }
+
+        try {
+          do {
+            let LoopResult = await LoopBody()
+            if (LoopResult !== undefined) { Result = LoopResult }     // "break"
+          } while (Result === undefined)
+
+          resolve(Result)
+        } catch (Signal) {
+          processEventOrTimeout(null)
+          reject(Signal)
+        }
+      })
+    }
+
+  /**** HandlersForEvent ****/
+
+    HandlersForEvent (this:DOMMaLi, Event:string):Function[] {
+      let Result:Function[] = []
+        Event = Event.trim().replace(/\s+/g,' ')
+        if (Event === '')     { throw new TypeError('no "Event" given') }
+        if (/\s/.test(Event)) { throw new TypeError('multiple "Events" given') }
+
+        let Subject = this.Subjects[0]
+        if (Subject == null) { return Result }
+
+        let EventRegistry:Indexable = (Subject as indexableElement)['_EventRegistry']
+        if (EventRegistry == null) { return Result }
+
+        let EntriesForEvent:Indexable = EventRegistry[Event]
+        if (EntriesForEvent == null) { return Result }
+
+        for (let Selector in EntriesForEvent) {
+          Result = Result.concat(EntriesForEvent[Selector as string])
+        }
+      return Result
     }
 
   /**** trigger ****/
@@ -1609,5 +1796,9 @@
     }
   }
 
-  Object.assign(dommali, { ready:DOMMaLi.ready })
+  Object.assign(dommali, {
+    ready:DOMMaLi.ready,
+    textWidth:DOMMaLi.textWidth, textHeight:DOMMaLi.textHeight,
+    extraParametersOfEvent:DOMMaLi.extraParametersOfEvent
+  })
 
