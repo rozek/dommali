@@ -234,10 +234,12 @@ The signatures shown below are those used by TypeScript
 * **`once (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>behaves like `once(Events,Selector,Handler)`, but automatically unregisters the given `Handler` upon its first invocation
 * **`once (Events:string, Selector:string|String|null, Data:any, Handler:Function):DOMMaLi`**<br>behaves like `once(Events,Selector,Data,Handler)`, but automatically unregisters the given `Handler` upon its first invocation
 * <a name="off"></a>**`off ():DOMMaLi`**<br>unregisters all event handlers registered in all DOM elements represented by this `dommali` object
-* **`off (Events:string):DOMMaLi`**<br>unregisters all event handlers registered for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object
+* <a name="off"></a>**`off (Events:string):DOMMaLi`**<br>unregisters all event handlers registered for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object
 * **`off (Events:string, Selector:string|String|null):DOMMaLi`**<br>unregisters all event handlers registered as delegated event handlers with CSS selector `Selector` for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object
 * **`off (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>unregisters the given `Handler` registered as delegated event handler with CSS selector `Selector` for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object
+* <a name="repeatUntil"></a>**`repeatUntil (...EventsOrTimeoutOrLoopBody:(string|number|Function)[]):Promise<any>`**<br>
 * <a name="trigger"></a>**`trigger (Event:string|Event, extraParameters?:any[]):boolean`**<br>fires the given `Event` on all DOM elements represented by this `dommali` object. If `Event` is given as a string, a `CustomEvent` of type `Event` is created and fired. The optional argument `extraParameters` may be a single value or a list of values which are passed as additional arguments (after the event object itself) to the Handler. `trigger` returns `false` if at least one of the invoked event handlers called `Event.preventDefault()` or `true` otherwise
+* <a name="waitFor"></a>**`waitFor (...EventsOrTimeout:(string|number)[]):Promise<any>`**<br>
 
 ### Focus Handling ###
 
