@@ -16,7 +16,7 @@ The most notable differences between `dommali` and jQuery (or a look-alike) are:
 * `dommali` does not define its own event object - nowadays, creating DOM events is so simple that there is just no need for a wrapper. It _does_, however, support `extraParameters` passed when triggering an event and Event `data` specified while registering an event handler
 * within asynchronous functions it is possible to <a href="#waitFor">`waitFor`</a> the arrival of an event or to write loops that <a href="#repeatUntil">`repeatUntil`</a> a given event arrives - both functions may also be provided with a timeout in order to prevent waiting or looping forever
 * event handler registrations support the special "selector" `@this` which effectively prevents the handler from being invoked by bubbling events
-* both event handler management functions and <a href="#waitFor">`waitFor`</a> or <a href="#repeatUntil">`repeatUntil`</a> support <a href="#notes_on_anchored_events">anchored events</a>, i.e., event names followed by a CSS selector which restricts the events to be handled to those triggered on specific elements only
+* both event handler management functions and <a href="#waitFor">`waitFor`</a> or <a href="#repeatUntil">`repeatUntil`</a> support <a href="#NotesOnAnchoredEvents">anchored events</a>, i.e., event names followed by a CSS selector which restricts the events to be handled to those triggered on specific elements only
 * `dommali` does not support CSS _animations_ but animated CSS transitions - and those are really simple
 
 **NPM users**: please consider the [Github README](https://github.com/rozek/dommali/blob/main/README.md) for the latest description of this package (as updating the docs would otherwise always require a new NPM package version)
@@ -245,9 +245,9 @@ The signatures shown below are those used by TypeScript
 * **`off (Events:string, Selector:string|String|null):DOMMaLi`**<br>unregisters all event handlers registered as delegated event handlers with CSS selector `Selector` for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object
 * **`off (anchoredEvent:string, Handler:Function):DOMMaLi`**<br>unregisters the given `Handler` registered for the given `anchoredEvent` in all DOM elements represented by this `dommali` object
 * **`off (Events:string, Selector:string|String|null, Handler:Function):DOMMaLi`**<br>unregisters the given `Handler` registered as delegated event handler with CSS selector `Selector` for every event in the (space-separated) list given by `Events` in all DOM elements represented by this `dommali` object<br>&nbsp;
-* <a name="repeatUntil"></a>**`repeatUntil (...anchoredEventsOrTimeoutOrLoopBody:(string|number|Function)[]):Promise<any>`**<br>returns a promise which resolves as soon as one of the given `anchoredEvents` has been received or the number of milliseconds given by a `Timeout` have passed. Until then, the given (asynchronous) `LoopBody` function will be executed as often as possible. If `LoopBody` returns any other value but `undefined`, the loop is terminated and the promise resolves to the loop body's return value. After receiving an event, `repeatUntil` resolves to that event as soon as `LoopBody` has finished; in case of a timeout it resolves to the actual number of milliseconds that have passed since the initial invocation (this number is usually slightly higher than the specified timeout) - but again, only after `LoopBody` has finished. All arguments except `LoopBody` are optional - calling `repeatUntil` solely with a `LoopBody` simply repeatedly executes that function until it returns a value different from `undefined` (see <a href="#notes_on_repeatUntil">Notes on `repeatUntil`</a>)
+* <a name="repeatUntil"></a>**`repeatUntil (...anchoredEventsOrTimeoutOrLoopBody:(string|number|Function)[]):Promise<any>`**<br>returns a promise which resolves as soon as one of the given `anchoredEvents` has been received or the number of milliseconds given by a `Timeout` have passed. Until then, the given (asynchronous) `LoopBody` function will be executed as often as possible. If `LoopBody` returns any other value but `undefined`, the loop is terminated and the promise resolves to the loop body's return value. After receiving an event, `repeatUntil` resolves to that event as soon as `LoopBody` has finished; in case of a timeout it resolves to the actual number of milliseconds that have passed since the initial invocation (this number is usually slightly higher than the specified timeout) - but again, only after `LoopBody` has finished. All arguments except `LoopBody` are optional - calling `repeatUntil` solely with a `LoopBody` simply repeatedly executes that function until it returns a value different from `undefined` (see <a href="#NotesOnRepeatUntil">Notes on `repeatUntil`</a>)
 * <a name="trigger"></a>**`trigger (Event:string|Event, extraParameters?:any[]):boolean`**<br>fires the given `Event` on all DOM elements represented by this `dommali` object. If `Event` is given as a string, a `CustomEvent` of type `Event` is created and fired. The optional argument `extraParameters` may be a single value or a list of values which are passed as additional arguments (after the event object itself) to the Handler. `trigger` returns `false` if at least one of the invoked event handlers called `Event.preventDefault()` or `true` otherwise
-* <a name="waitFor"></a>**`waitFor (...anchoredEventsOrTimeout:(string|number)[]):Promise<any>`**<br>returns a promise which resolves as soon as one of the given `anchoredEvents` has been received or the number of milliseconds given by a `Timeout` have passed. All arguments are optional - calling `waitFor` without any arguments just resolves immediately. After receiving an event, `waitFor` resolves to that event; in case of a timeout it resolves to the actual number of milliseconds that have passed since the initial invocation (this number is usually slightly higher than the specified timeout) (see <a href="#notes_on_waitFor">Notes on `waitFor`</a>)
+* <a name="waitFor"></a>**`waitFor (...anchoredEventsOrTimeout:(string|number)[]):Promise<any>`**<br>returns a promise which resolves as soon as one of the given `anchoredEvents` has been received or the number of milliseconds given by a `Timeout` have passed. All arguments are optional - calling `waitFor` without any arguments just resolves immediately. After receiving an event, `waitFor` resolves to that event; in case of a timeout it resolves to the actual number of milliseconds that have passed since the initial invocation (this number is usually slightly higher than the specified timeout) (see <a href="#NotesOnWaitFor">Notes on `waitFor`</a>)
 
 ### Focus Handling ###
 
@@ -266,7 +266,7 @@ The signatures shown below are those used by TypeScript
 
 > Nota bene: <a href="#waitFor">`waitFor`</a> and <a href="#repeatUntil">`repeatUntil`</a> were inspired by [_hyperscript](https://github.com/bigskysoftware/_hyperscript)
 
-### <a name="notes_on_anchored_events">Anchored Events</a> ####
+### <a name="NotesOnAnchoredEvents">Anchored Events</a> ####
 
 Both event handler management functions and <a href="#waitFor">`waitFor`</a> or <a href="#repeatUntil">`repeatUntil`</a> support "anchored events", i.e., event names followed by a CSS selector which restricts the events to be handled to those triggered on specific elements only. JQuery (and its look-alikes) support this declaration of "delegated event handlers" by means of an additional "selector" argument to functions like `on`, `once` or `off` - `dommali` additionally allows event name and event target selector to be specified within a single string argument just by separating them with an "at"-character `@`:
 
@@ -286,7 +286,7 @@ In an "anchored event" specification, this event name is followed by an "at" sig
 * `pointerdown@.draggable` or
 * `pointermove@this`
 
-### <a name="notes_on_waitFor">waitFor</a> ###
+### <a name="NotesOnWaitFor">waitFor</a> ###
 
 `waitFor (...anchoredEventsOrTimeout:(string|number)[])` returns a promise which resolves as soon as one of the given `anchoredEvents` has been received or the number of milliseconds given by a `Timeout` have passed. `waitFor` has to be invoked as a method on (one or multiple) `dommali` elements as it dynamically registers and unregisters event handlers on these elements.
 
@@ -303,7 +303,7 @@ $(document.body).waitFor('mousedown','pointerdown',5000).then((Result) => {
 })
 ```
 
-### <a name="notes_on_repeatUntil">repeatUntil</a> ###
+### <a name="NotesOnRepeatUntil">repeatUntil</a> ###
 
 (bound to dommali elements, promise handling or async/await)
 
