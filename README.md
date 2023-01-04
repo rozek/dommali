@@ -290,7 +290,7 @@ $(document.body).waitFor('mousedown','pointerdown',5000).then((Result) => {
 simple dragging example:
 ```
 const $ = dommali // make "dommali" calls look like "jQuery" ones
-$(document.body).on('pointerdown@.draggable',async function (Event) {
+$(document.body).on('pointerdown@.draggable',async function (Event) { // invocation-specific "this"
   if (Event.button !== 0) { return }
 
   let $Draggable = $(Event.target)
@@ -301,7 +301,7 @@ $(document.body).on('pointerdown@.draggable',async function (Event) {
 
   let PointerId = Event.pointerId
   this.subject(0).setPointerCapture(PointerId)
-    let Result = await this.repeatUntil('pointerup', 5000, async () => {
+    let Result = await this.repeatUntil('pointerup', 5000, async () => { // closure "this"
       Event = await this.waitFor('pointermove','pointerup')
       if (Event.type === 'pointermove') {
         $Draggable.css({ left:(Event.pageX-OffsetX)+'px', top:(Event.pageY-OffsetY)+'px' })
