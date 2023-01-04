@@ -272,9 +272,16 @@ Both event handler management functions and <a href="#waitFor">`waitFor`</a> or 
 
 &nbsp; "<i>event-name</i><b>@</b><i>selector</i>"
 
-For this to become possible, 
+For this to become possible, however, in `dommali` the syntax of event names has been narrowed a bit: while HTML actually allows event names in almost any format (including spaces and control characters), `dommali` defines the following syntax rules:
 
-(event name followed by CSS selector, stricter event name syntax)
+Event names
+
+* have to start with a roman letter (a-z), a dollar sign or an underscore, followed by decimal digits (0-9), additional roman letters (a-z), dollar signs or underscores
+* optionally followed by one or multiple groups of a single hyphen, dot or colon followed by one or multiple decimal digits (0-9), roman letters (a-z), dollar signs or underscores
+
+The corresponding JavaScript RegExp is `/^[a-z$_][a-z$_0-9]*([-.:][a-z$_0-9]+)*@.*$/`
+
+In an "anchored event" specification, this event name is followed by an "at" sign and one or multiple CSS selectors. The special "selector" `this` restricts incoming events to those triggered at the listening element itself
 
 ### <a name="notes-on-waitFor">waitFor</a> ###
 
