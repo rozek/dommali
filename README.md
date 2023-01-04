@@ -264,6 +264,8 @@ The signatures shown below are those used by TypeScript
 
 `dommali` contains additional support for simplified and streamlined event handling.
 
+> Nota bene: the following features were inspired by [_hyperscript](https://github.com/bigskysoftware/_hyperscript)
+
 ### <a name="notes-on-anchored-events">Anchored Events</a> ####
 
 (event name followed by CSS selector, stricter event name syntax)
