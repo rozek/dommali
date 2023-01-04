@@ -281,7 +281,10 @@ Event names
 
 The corresponding JavaScript RegExp is `/^[a-z$_][a-z$_0-9]*([-.:][a-z$_0-9]+)*@.*$/`
 
-In an "anchored event" specification, this event name is followed by an "at" sign and one or multiple CSS selectors. The special "selector" `this` restricts incoming events to those triggered at the listening element itself
+In an "anchored event" specification, this event name is followed by an "at" sign and one or multiple CSS selectors. The special "selector" `this` restricts incoming events to those triggered at the listening element itself. Typical examples look like:
+
+* `pointerdown@.draggable` or
+* `pointermove@this`
 
 ### <a name="notes-on-waitFor">waitFor</a> ###
 
