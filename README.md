@@ -288,7 +288,9 @@ In an "anchored event" specification, this event name is followed by an "at" sig
 
 ### <a name="NotesOnWaitFor">waitFor</a> ###
 
-`waitFor (...anchoredEventsOrTimeout:(string|number)[])` returns a promise which resolves as soon as one of the given `anchoredEvents` has been received or the number of milliseconds given by a `Timeout` have passed. `waitFor` has to be invoked as a method on (one or multiple) `dommali` elements as it dynamically registers and unregisters event handlers on these elements.
+`waitFor (...anchoredEventsOrTimeout:(string|number)[])` returns a promise which resolves as soon as one of the given `anchoredEvents` has been received or the number of milliseconds given by a `Timeout` have passed.
+
+`waitFor` has to be invoked as a method on (one or multiple) `dommali` elements as it dynamically registers and unregisters event handlers on these elements.
 
 In an asynchronous function, `waitFor` is a simple approach to wait for the arrival of an event (as shown in the following example):
 
@@ -305,7 +307,9 @@ $(document.body).waitFor('mousedown','pointerdown',5000).then((Result) => {
 
 ### <a name="NotesOnRepeatUntil">repeatUntil</a> ###
 
-`repeatUntil (...anchoredEventsOrTimeoutOrLoopBody:(string|number|Function)[])` returns a promise which resolves after one of the given `anchoredEvents` has been received or the number of milliseconds given by a `Timeout` have passed. Until then, the given (asynchronous) `LoopBody` function will be executed as often as possible. If `LoopBody` returns any other value but `undefined`, the loop is terminated and the promise resolves to the loop body's return value. After receiving an event, `repeatUntil` resolves to that event as soon as `LoopBody` has finished without any return value; in case of a timeout it resolves to the actual number of milliseconds that have passed since the initial invocation - but again, only after `LoopBody` has finished without any return value. `repeatUntil` has to be invoked as a method on (one or multiple) `dommali` elements as it dynamically registers and unregisters event handlers on these elements.
+`repeatUntil (...anchoredEventsOrTimeoutOrLoopBody:(string|number|Function)[])` returns a promise which resolves after one of the given `anchoredEvents` has been received or the number of milliseconds given by a `Timeout` have passed. Until then, the given (asynchronous) `LoopBody` function will be executed as often as possible. If `LoopBody` returns any other value but `undefined`, the loop is terminated and the promise resolves to the loop body's return value. After receiving an event, `repeatUntil` resolves to that event as soon as `LoopBody` has finished without any return value; in case of a timeout it resolves to the actual number of milliseconds that have passed since the initial invocation - but again, only after `LoopBody` has finished without any return value.
+
+`repeatUntil` has to be invoked as a method on (one or multiple) `dommali` elements as it dynamically registers and unregisters event handlers on these elements.
 
 In an asynchronous function, `repeatUntil` may be used to simplify the proper handling of multiple consecutively arriving events. For example, the following code snippet makes all DOM elements with CSS class `draggable` draggable within their parent:
 
