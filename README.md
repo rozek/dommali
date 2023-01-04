@@ -268,6 +268,12 @@ The signatures shown below are those used by TypeScript
 
 ### <a name="notes-on-anchored-events">Anchored Events</a> ####
 
+Both event handler management functions and <a href="#waitFor">`waitFor`</a> or <a href="#repeatUntil">`repeatUntil`</a> support "anchored events", i.e., event names followed by a CSS selector which restricts the events to be handled to those triggered on specified elements only. JQuery (and its look-alikes) support this kind of "delegated event handling" by means of an additional "selector" argument to functions like `on`, `once` or `off` - `dommali` additionally allows event name and event target selector to be specified within a single string argument just by separating them with an "at"-character `@`:
+
+  "event-name@selector"
+
+For this to become possible, 
+
 (event name followed by CSS selector, stricter event name syntax)
 
 ### <a name="notes-on-waitFor">waitFor</a> ###
