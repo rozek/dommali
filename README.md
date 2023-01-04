@@ -296,8 +296,8 @@ $(document.body).on('pointerdown@.draggable',async function (Event) { // invocat
   let $Draggable = $(Event.target)
   let $Container = $Draggable.parent()
 
-  let OffsetX = Event.offsetX+$Container.positionOnPage().left
-  let OffsetY = Event.offsetY+$Container.positionOnPage().top
+  let OffsetX = Event.offsetX + $Container.positionOnPage().left
+  let OffsetY = Event.offsetY + $Container.positionOnPage().top
 
   let PointerId = Event.pointerId
   this.subject(0).setPointerCapture(PointerId)
