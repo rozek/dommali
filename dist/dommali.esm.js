@@ -1231,9 +1231,6 @@ var DOMMaLi = /** @class */ (function () {
                 if (LoopBody == null) {
                     throw new TypeError('no loop body function given');
                 }
-                if (EventsOrTimeoutOrLoopBody.length === 1) { // just a loop body
-                    return [2 /*return*/, 0];
-                }
                 if (!isFinite(Timeout)) {
                     Timeout = 0;
                 }
