@@ -30,7 +30,7 @@
 
 /**** ValueIsEventNameWithSelector ****/
 
-  const NameWithSelectorPattern = /^[a-z$_][a-z$_0-9]*([-.:][a-z$_0-9]*)*@.*$/i
+  const NameWithSelectorPattern = /^[a-z$_][a-z$_0-9]*([-.:][a-z$_0-9]+)*@.*$/i
 
   function ValueIsEventNameWithSelector (Value:any):boolean {
     return (
