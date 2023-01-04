@@ -288,7 +288,9 @@ In an "anchored event" specification, this event name is followed by an "at" sig
 
 ### <a name="notes-on-waitFor">waitFor</a> ###
 
-`waitFor (...anchoredEventsOrTimeout:(string|number)[])` returns a promise which resolves as soon as one of the given `anchoredEvents` has been received or the number of milliseconds given by a `Timeout` have passed. `waitFor` has to be invoked as a method on (one or multiple) `dommali` elements as it dynamically registers and unregisters event handlers on these elements. In an asynchronous function, `waitFor` is a simple approach to wait for the arrival of an event
+`waitFor (...anchoredEventsOrTimeout:(string|number)[])` returns a promise which resolves as soon as one of the given `anchoredEvents` has been received or the number of milliseconds given by a `Timeout` have passed. `waitFor` has to be invoked as a method on (one or multiple) `dommali` elements as it dynamically registers and unregisters event handlers on these elements.
+
+In an asynchronous function, `waitFor` is a simple approach to wait for the arrival of an event (as shown in the following example):
 
 ```
 const $ = dommali // make "dommali" calls look like "jQuery" ones
