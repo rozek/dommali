@@ -287,29 +287,31 @@ $(document.body).waitFor('mousedown','pointerdown',5000).then((Result) => {
 
 (bound to dommali elements, promise handling or async/await)
 
+simple dragging example:
 ```
 const $ = dommali // make "dommali" calls look like "jQuery" ones
-$(document.body).on('pointerdown@.draggable',async (Event) => {
+$(document.body).on('pointerdown@.draggable',async function (Event) {
   if (Event.button !== 0) { return }
 
-  let Draggable  = Event.target, $Draggable = $(Draggable)
+  let $Draggable = $(Event.target)
   let $Container = $Draggable.parent()
-  
+
   let OffsetX = Event.offsetX+$Container.positionOnPage().left
   let OffsetY = Event.offsetY+$Container.positionOnPage().top
 
   let PointerId = Event.pointerId
-  Draggable.setPointerCapture(PointerId)
-    let Result = await repeatUntil('pointerdown',5000,async () => {
+  this.subject(0).setPointerCapture(PointerId)
+    let Result = await this.repeatUntil('pointerup', 5000, async () => {
       Event = await this.waitFor('pointermove','pointerup')
       if (Event.type === 'pointermove') {
         $Draggable.css({ left:(Event.pageX-OffsetX)+'px', top:(Event.pageY-OffsetY)+'px' })
       }
     })
-  Draggable.releasePointerCapture(PointerId)
+  this.subject(0).releasePointerCapture(PointerId)
   return Result
 })
 ```
+(please note the use of both `function` and "fat-arrow" literals because of the desired `this` handling)
 
 ## Build Instructions ##
 
