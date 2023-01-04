@@ -1,6 +1,6 @@
 {
   "name": "dommali",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "a lightweight DOM manipulation library with jQuery-inspired \"fluent\" API",
   "type": "module",
   "main": "./dist/dommali.js",
