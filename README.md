@@ -260,9 +260,9 @@ The signatures shown below are those used by TypeScript
 
 * <a name="transition"></a>**`transition (Settings:PlainObject, Options?:PlainObject):DOMMaLi`**<br>defines a CSS transition (as specified by the optional `Options`) for all CSS properties given by the keys of `Settings` and all **HTML elements** represented by this `dommali` object and starts this transition by setting every CSS property to the value given in `Settings`. Options may customize the transition with a `duration` (in ms), an initial `delay` (in ms) and/or an [`easing` function](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function). Additionally, a `cleanup` option may be defined which, if `true`, restores the transition settings at the end of a transition to their values before invoking this method
 
-## Notes on DOMMaLi Event Handling ##
+## Notes on dommali Event Handling ##
 
-(t.b.d)
+`dommali` contains additional support for simplified and streamlined event handling.
 
 ### <a name="notes-on-anchored-events">Anchored Events</a> ####
 
