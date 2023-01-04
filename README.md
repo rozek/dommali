@@ -276,7 +276,7 @@ For this to become possible, however, in `dommali` the syntax of event names has
 
 Event names
 
-* have to start with a roman letter (a-z), a dollar sign or an underscore, followed by decimal digits (0-9), additional roman letters (a-z), dollar signs or underscores
+* have to start with a roman letter (a-z), a dollar sign or an underscore, optionally followed by one or multiple decimal digits (0-9), roman letters (a-z), dollar signs or underscores
 * optionally followed by one or multiple groups of a single hyphen, dot or colon followed by one or multiple decimal digits (0-9), roman letters (a-z), dollar signs or underscores
 
 The corresponding JavaScript RegExp is `/^[a-z$_][a-z$_0-9]*([-.:][a-z$_0-9]+)*@.*$/`
