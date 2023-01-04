@@ -266,15 +266,50 @@ The signatures shown below are those used by TypeScript
 
 ### <a name="notes-on-anchored-events">Anchored Events</a> ####
 
-(t.b.d)
+(event name followed by CSS selector, stricter event name syntax)
 
 ### <a name="notes-on-waitFor">waitFor</a> ###
 
-(t.b.d)
+(bound to dommali elements, promise handling or async/await)
+
+```
+const $ = dommali // make "dommali" calls look like "jQuery" ones
+$(document.body).waitFor('mousedown','pointerdown',5000).then((Result) => {
+  switch (true) {
+    case typeof Result === 'number':  ... (handle timeout)
+    case Result.type === 'mousedown': ... (handle 'mousedown')
+    default:                          ... (handle 'pointerdown')
+  }
+})
+```
 
 ### <a name="notes-on-repeatUntil">repeatUntil</a> ###
 
-(t.b.d)
+(bound to dommali elements, promise handling or async/await)
+
+```
+const $ = dommali // make "dommali" calls look like "jQuery" ones
+$(document.body).on('pointerdown@.draggable',async (Event) => {
+  if (Event.button !== 0) { return }
+
+  let Draggable  = Event.target, $Draggable = $(Draggable)
+  let $Container = $Draggable.parent()
+  
+  let OffsetX = Event.offsetX+$Container.positionOnPage().left
+  let OffsetY = Event.offsetY+$Container.positionOnPage().top
+
+  let PointerId = Event.pointerId
+  Draggable.setPointerCapture(PointerId)
+    let Result = await repeatUntil('pointerdown',5000,async () => {
+      Event = await this.waitFor('pointermove','pointerup')
+      if (Event.type === 'pointermove') {
+        $Draggable.css({ left:(Event.pageX-OffsetX)+'px', top:(Event.pageY-OffsetY)+'px' })
+      }
+    })
+  Draggable.releasePointerCapture(PointerId)
+  return Result
+})
+```
 
 ## Build Instructions ##
 
