@@ -1161,6 +1161,9 @@ var DOMMaLi = /** @class */ (function () {
             return __generator(this, function (_a) {
                 EventList = [];
                 Timeout = -1;
+                if (EventsOrTimeout.length === 0) {
+                    return [2 /*return*/, 0];
+                }
                 EventsOrTimeout.forEach(function (EventOrTimeout) {
                     switch (true) {
                         case ValueIsString(EventOrTimeout):
@@ -1190,7 +1193,7 @@ var DOMMaLi = /** @class */ (function () {
                             }
                         }
                         EventList.forEach(function (EventSpec) { return Target.on(EventSpec, cleanupFrom); });
-                        if (Timeout > 0) {
+                        if (Timeout >= 0) {
                             StartTime = Date.now();
                             Timer = setTimeout(cleanupFrom, Timeout);
                         }
@@ -1228,6 +1231,9 @@ var DOMMaLi = /** @class */ (function () {
                 if (LoopBody == null) {
                     throw new TypeError('no loop body function given');
                 }
+                if (EventsOrTimeoutOrLoopBody.length === 1) { // just a loop body
+                    return [2 /*return*/, 0];
+                }
                 if (!isFinite(Timeout)) {
                     Timeout = 0;
                 }
@@ -1249,7 +1255,7 @@ var DOMMaLi = /** @class */ (function () {
                                     Target = this;
                                     Result = undefined;
                                     EventList.forEach(function (EventSpec) { return Target.on(EventSpec, processEventOrTimeout); });
-                                    if (Timeout > 0) {
+                                    if (Timeout >= 0) {
                                         StartTime = Date.now();
                                         Timer = setTimeout(processEventOrTimeout, Timeout);
                                     }
