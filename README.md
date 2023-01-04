@@ -289,7 +289,8 @@ $(document.body).waitFor('mousedown','pointerdown',5000).then((Result) => {
 
 (bound to dommali elements, promise handling or async/await)
 
-simple dragging example:
+The following simple example makes all DOM elements with CSS class `draggable` draggable within their parent:
+
 ```
 const $ = dommali // make "dommali" calls look like "jQuery" ones
 $(document.body).on('pointerdown@.draggable',async function (Event) { // invocation-specific "this"
@@ -313,6 +314,7 @@ $(document.body).on('pointerdown@.draggable',async function (Event) { // invocat
   return Result
 })
 ```
+
 (please note the use of both `function` and "fat-arrow" literals because of the desired `this` handling)
 
 ## Build Instructions ##
