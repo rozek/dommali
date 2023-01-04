@@ -1531,10 +1531,6 @@
         throw new TypeError('no loop body function given')
       }
 
-      if (EventsOrTimeoutOrLoopBody.length === 1) {          // just a loop body
-        return 0
-      }
-
       if (! isFinite(Timeout)) { Timeout = 0 }
 
       return new Promise(async (resolve,reject) => {
