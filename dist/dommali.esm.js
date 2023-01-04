@@ -80,7 +80,7 @@ function ValueIsFunction(Value) {
     return (typeof Value === 'function');
 }
 /**** ValueIsEventNameWithSelector ****/
-var NameWithSelectorPattern = /^[a-z$_][a-z$_0-9]*([-.:][a-z$_0-9]*)*@.*$/i;
+var NameWithSelectorPattern = /^[a-z$_][a-z$_0-9]*([-.:][a-z$_0-9]+)*@.*$/i;
 function ValueIsEventNameWithSelector(Value) {
     return ((typeof Value === 'string') || (Value instanceof String)) && NameWithSelectorPattern.test(Value);
 }
