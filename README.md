@@ -264,15 +264,15 @@ The signatures shown below are those used by TypeScript
 
 (t.b.d)
 
-### <a href="notes-on-anchored-events">Anchored Events</a> ####
+### <a name="notes-on-anchored-events">Anchored Events</a> ####
 
 (t.b.d)
 
-### <a href="notes-on-waitFor">waitFor</a> ###
+### <a name="notes-on-waitFor">waitFor</a> ###
 
 (t.b.d)
 
-### <a href="notes-on-repeatUntil">repeatUntil</a> ###
+### <a name="notes-on-repeatUntil">repeatUntil</a> ###
 
 (t.b.d)
 
