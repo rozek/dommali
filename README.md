@@ -333,7 +333,6 @@ $(document.body).on('pointerdown@.draggable',async function (Event) { // invocat
       }
     })
   this.subject(0).releasePointerCapture(PointerId)
-  return Result
 })
 ```
 
