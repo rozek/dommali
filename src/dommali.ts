@@ -1806,3 +1806,7 @@
     extraParametersOfEvent:DOMMaLi.extraParametersOfEvent
   })
 
+/**** always also provide DOMMaLi as a global ****/
+
+  let global = (new Function('return this'))()
+  global.dommali = dommali
