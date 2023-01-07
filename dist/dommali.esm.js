@@ -1504,6 +1504,9 @@ Object.assign(dommali, {
     textWidth: DOMMaLi.textWidth, textHeight: DOMMaLi.textHeight,
     extraParametersOfEvent: DOMMaLi.extraParametersOfEvent
 });
+/**** always also provide DOMMaLi as a global ****/
+var global = (new Function('return this'))();
+global.dommali = dommali;
 
 export { dommali as default };
 //# sourceMappingURL=dommali.esm.js.map
