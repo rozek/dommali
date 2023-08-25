@@ -1,5 +1,5 @@
-declare type Primitive = null | undefined | boolean | number | string;
-declare type PlainObject = Record<string, Primitive>;
+type Primitive = null | undefined | boolean | number | string;
+type PlainObject = Record<string, Primitive>;
 declare abstract class DOMMaLi {
     protected Subjects: Element[];
     /**** ready - similar to jQuery.ready ****/
