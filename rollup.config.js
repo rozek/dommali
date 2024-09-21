@@ -1,13 +1,13 @@
 // see https://github.com/rozek/build-configuration-study
 
 import typescript from '@rollup/plugin-typescript';
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser'
 
 export default {
   input: './src/dommali.ts',
   output: [
     {
-      file:     './dist/dommali.js',
+      file:     './dist/dommali.umd.js',
       format:   'umd', // builds for both Node.js and Browser
       name:     'dommali', // required for UMD modules
       sourcemap:true,
